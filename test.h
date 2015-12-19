@@ -422,6 +422,155 @@ bvuMatVecMul( const std::vector<float> & vals1, const std::vector<float> & vals2
     return m * v;
 }
 
+glm::mat4
+glmTranslate( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::translate( m, v );
+}
+
+bvu::mat4f
+bvuTranslate( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::translate( m, v );
+}
+
+glm::mat4
+glmScale( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::scale( m, v );
+}
+
+bvu::mat4f
+bvuScale( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::scale( m, v );
+}
+
+glm::mat4
+glmRotate( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals, float angle )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::rotate( m, angle, v );
+}
+
+bvu::mat4f
+bvuRotate ( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals, float angle )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::rotate( m, bsc::deg2rad(angle), v );
+}
+
+glm::mat4
+glmLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, const std::vector<float> & vals3 )
+{
+    glm::vec3 eye ( vals1[0], vals1[1], vals1[2] );
+    glm::vec3 center ( vals2[0], vals2[1], vals2[2] );
+    glm::vec3 up ( vals3[0], vals3[1], vals3[2] );
+    return glm::lookAt( eye, center, up );
+}
+
+bvu::mat4f
+bvuLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, const std::vector<float> & vals3 )
+{
+    bvu::vec3f eye ( vals1[0], vals1[1], vals1[2] );
+    bvu::vec3f center ( vals2[0], vals2[1], vals2[2] );
+    bvu::vec3f up ( vals3[0], vals3[1], vals3[2] );
+    return bvu::lookAt( eye, center, up );
+}
+
+glm::mat4
+glmPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
+{
+    // bvu::printMat4(glm::perspective( fovy, aspect, z_near, z_far ));
+    return glm::perspective( fovy, aspect, z_near, z_far );
+}
+
+bvu::mat4f
+bvuPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
+{
+    // bvu::printMat4(bvu::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far ));
+    return bvu::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far );
+}
+
+
+glm::mat4
+glmFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+{
+    // bvu::printMat4(glm::frustum( fovy, aspect, z_near, z_far ));
+    return glm::frustum( left, right, bottom, top, z_near, z_far );
+}
+
+bvu::mat4f
+bvuFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+{
+    // bvu::printMat4(bvu::frustum( fovy, aspect, z_near, z_far ));
+    return bvu::frustum( left, right, bottom, top, z_near, z_far );
+}
+
+glm::mat4
+glmOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+{
+    // bvu::printMat4(glm::ortho( fovy, aspect, z_near, z_far ));
+    return glm::ortho( left, right, bottom, top, z_near, z_far );
+}
+
+bvu::mat4f
+bvuOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+{
+    // bvu::printMat4(bvu::ortho( fovy, aspect, z_near, z_far ));
+    return bvu::ortho( left, right, bottom, top, z_near, z_far );
+}
+
+glm::vec3
+glmProject ()
+{
+    glm::vec3 w( 10.0f, 10.0f, 10.0f);
+    glm::mat4 proj = glm::perspective( 45.0f, 1.3f, 0.01f, 100.0f);
+    glm::mat4 view = glm::lookAt( glm::vec3( 0.0, 0.0, -3.0 ), glm::vec3( 0.0, 0.0, 0.0 ), glm::vec3( 0.0, 1.0, 0.0 ) );
+    glm::vec4 viewport (0, 0, 640, 480);
+    return glm::project( w, view, proj, viewport );
+}
+
+bvu::vec3f
+bvuProject ()
+{
+    bvu::vec4f w ( 10.0f, 10.0f, 10.0f, 1.0f);
+    bvu::mat4f proj = bvu::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
+    bvu::mat4f view = bvu::lookAt( bvu::vec3f( 0.0, 0.0, -3.0 ), bvu::vec3f( 0.0, 0.0, 0.0 ), bvu::vec3f( 0.0, 1.0, 0.0 ) );
+    bvu::vec4f viewport (0, 0, 640, 480);
+    return bvu::project( w, view, proj, viewport );
+}
+
+glm::vec4
+glmUnProject ()
+{
+    glm::vec3 w( -137.129, 685.701, 0.999 );
+    glm::mat4 proj = glm::perspective( 45.0f, 1.3f, 0.01f, 100.0f);
+    glm::mat4 view = glm::lookAt( glm::vec3( 0.0, 0.0, -3.0 ), glm::vec3( 0.0, 0.0, 0.0 ), glm::vec3( 0.0, 1.0, 0.0 ) );
+    glm::vec4 viewport (0, 0, 640, 480);
+    return glm::vec4( glm::unProject( w, view, proj, viewport ), 1.0 );
+}
+
+bvu::vec4f
+bvuUnProject ()
+{
+    bvu::vec3f w ( -137.129, 685.701, 0.999 );
+    bvu::mat4f proj = bvu::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
+    bvu::mat4f view = bvu::lookAt( bvu::vec3f( 0.0, 0.0, -3.0 ), bvu::vec3f( 0.0, 0.0, 0.0 ), bvu::vec3f( 0.0, 1.0, 0.0 ) );
+    bvu::vec4f viewport (0, 0, 640, 480);
+    return bvu::unproject( w, view, proj, viewport );
+}
+
 glm::quat
 glmQuatMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
@@ -482,54 +631,36 @@ bvuQuatDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
     return bvu::dot( q1, q2 );
 }
 
-
-glm::mat4
-glmTranslate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+glm::quat
+glmMatToQuat( const std::vector<float> & mat_vals )
 {
     glm::mat4 m = InitGLMMat4( mat_vals );
-    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return glm::translate( m, v );
+    return glm::quat_cast( m );
 }
 
-bvu::mat4f
-bvuTranslate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+bvu::quatf
+bvuMatToQuat( const std::vector<float> & mat_vals )
 {
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::translate( m, v );
+    bvu::mat4f m( &mat_vals[0] );
+    return bvu::to_quat( m );
 }
 
 glm::mat4
-glmScale( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+glmQuatToMat( const std::vector<float> & vals1 )
 {
-    glm::mat4 m = InitGLMMat4( mat_vals );
-    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return glm::scale( m, v );
+    glm::vec3 v ( vals1[0], vals1[1], vals1[2] );
+    glm::quat q ( vals1[3], v );
+    return glm::mat4_cast( q );
 }
 
 bvu::mat4f
-bvuScale( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+bvuQuatToMat( const std::vector<float> & vals1 )
 {
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::scale( m, v );
+    bvu::vec3f v ( vals1[0], vals1[1], vals1[2] );
+    bvu::quatf q ( vals1[3], v );
+    return bvu::to_mat4( q );
 }
 
-glm::mat4
-glmRotate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals, float angle )
-{
-    glm::mat4 m = InitGLMMat4( mat_vals );
-    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return glm::rotate( m, angle, v );
-}
-
-bvu::mat4f
-bvuRotate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals, float angle )
-{
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::rotate( m, bsc::deg2rad(angle), v );
-}
 
 
 void
@@ -538,8 +669,10 @@ RunTests()
     // data
     std::vector<float> data_vec3_A = { 1.0f, 2.0f, 3.0f };
     std::vector<float> data_vec3_B = { -1.20f, 3.6f, -3.8f };
+    std::vector<float> data_vec3_C = { 0.0f, 0.0f, 1.0f };
 
     std::vector<float> data_vec4_A = { 1.0f, 2.0f, 3.0f, 4.0f };
+    std::vector<float> data_quat_A = { 0.0f, 1.0f, 0.0f, M_PI };
     std::vector<float> data_vec4_B = { -11.20f, 12.2f, -13.0f, 12.321f };
 
     std::vector<float> data_mat4_A = { 1.0f, 0.0f, 2.0f, 0.0f,
@@ -652,8 +785,31 @@ RunTests()
     if ( CompareResults( glmQuatInverse, bvuQuatInverse, data_vec4_A ) ) printf("%-30s- passed!\n", "Quaternion Inverse");
     else                                                                 printf("%-30s- failed!\n", "Quaternion Inverse");
 
+    if ( CompareResults( glmQuatToMat, bvuQuatToMat, data_quat_A ) ) printf("%-30s- passed!\n", "Quaternion To Matrix");
+    else                                                             printf("%-30s- failed!\n", "Quaternion To Matrix");
+
+
+    if ( CompareResults( glmMatToQuat, bvuMatToQuat, data_mat4_A ) ) printf("%-30s- passed!\n", "Matrix To Quaternion");
+    else                                                             printf("%-30s- failed!\n", "Matrix To Quaternion");
 
     // Glu functions
+    if ( CompareResults( glmLookAt, bvuLookAt, data_vec3_A, data_vec3_B, data_vec3_C ) ) printf("%-30s- passed!\n", "Look At Matrix");
+    else                                                                                 printf("%-30s- failed!\n", "Look At Matrix");
+
+    if ( CompareResults( glmPerspective, bvuPerspective, 45.0f, 1.3f, 0.01f, 100.0f ) ) printf("%-30s- passed!\n", "Perspective Matrix");
+    else                                                                                printf("%-30s- failed!\n", "Perspective Matrix");
+
+    if ( CompareResults( glmFrustum, bvuFrustum, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-30s- passed!\n", "Frustum Matrix");
+    else                                                                                     printf("%-30s- failed!\n", "Frustum Matrix");
+
+    if ( CompareResults( glmOrtho, bvuOrtho, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-30s- passed!\n", "Ortho Matrix");
+    else                                                                                 printf("%-30s- failed!\n", "Ortho Matrix");
+
+    if ( CompareResults( glmProject, bvuProject ) ) printf("%-30s- passed!\n", "Project Function");
+    else                                            printf("%-30s- failed!\n", "Project Function");
+
+    if ( CompareResults( glmUnProject, bvuUnProject ) ) printf("%-30s- passed!\n", "Unproject Function");
+    else                                                printf("%-30s- failed!\n", "Unproject Function");
 
 
     // Transforms

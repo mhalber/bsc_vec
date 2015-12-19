@@ -25,7 +25,7 @@ namespace bvu
     mat4<T> lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up );
 
     template< typename T>
-    mat4<T> perspective ( const T & fovy, const T & aspect, const T & z_far, const T & z_near);
+    mat4<T> perspective ( const T & fovy, const T & aspect, const T & z_near, const T & z_far);
 
     template< typename T>
     mat4<T> frustum ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far );
@@ -374,15 +374,15 @@ inverse ( const matX<T> & mat )
 
 template< typename T>
 inline bvu::mat4<T> bvu ::
-perspective ( const T & fovy, const T & aspect, const T & z_far, const T & z_near)
+perspective ( const T & fovy, const T & aspect, const T & z_near, const T & z_far)
 {
-    T f = tan( 0.5 * M_PI - fovy );
+    T f = tan( 0.5 * (M_PI - fovy) );
     T diff = z_near - z_far;
-    mat4<T> result = { f / aspect, 0.0,                           0.0,  0.0,
-                              0.0,   f,                           0.0,  0.0,
-                              0.0, 0.0,       (z_far + z_near) / diff, -1.0,
-                              0.0, 0.0, (2.0 * z_far * z_near) / diff,  0.0 };
-    return result;
+    T tmp[16] =  { f / aspect, 0.0,                           0.0,  0.0,
+                          0.0,   f,                           0.0,  0.0,
+                          0.0, 0.0,       (z_far + z_near) / diff, -1.0,
+                          0.0, 0.0, ((T)2 * z_far * z_near) / diff,  0.0 };
+    return  mat4<T>( tmp );
 }
 
 template< typename T>
@@ -397,11 +397,11 @@ frustum ( const T & left, const T & right, const T & bottom, const T & top, cons
     T c = -(z_far + z_near ) / z_diff;
     T d = -(2 * z_far * z_near ) / z_diff;
 
-    mat4<T> result = { (2 * z_near) / x_diff,                   0.0, 0.0,  0.0,
-                                         0.0, (2 * z_near) / y_diff, 0.0,  0.0,
-                                           a,                     b,   c, -1.0,
-                                         0.0,                   0.0,   d,  0.0 };
-    return result;
+    T tmp[16] = { ((T)2 * z_near) / x_diff,                      0.0, 0.0,  0.0,
+                                       0.0, ((T)2 * z_near) / y_diff, 0.0,  0.0,
+                                         a,                        b,   c, -1.0,
+                                       0.0,                      0.0,   d,  0.0 };
+    return  mat4<T>( tmp );
 }
 
 template< typename T>
@@ -415,11 +415,12 @@ ortho ( const T & left, const T & right, const T & bottom, const T & top, const 
     T ty = - ( top + bottom ) / y_diff;
     T tz = - ( z_near + z_far ) / z_diff;
 
-    mat4<T> result = { 2.0 / x_diff,          0.0,           0.0, 0.0,
-                                0.0, 2.0 / x_diff,           0.0, 0.0,
-                                0.0,          0.0, -2.0 / z_diff, 0.0,
-                                 tx,           ty,            tz, 1.0 };
-    return result;}
+    T tmp[16] =  { (T)2 / x_diff,          0.0,           0.0, 0.0,
+                            0.0, (T)2 / x_diff,           0.0, 0.0,
+                            0.0,          0.0, -(T)2 / z_diff, 0.0,
+                             tx,           ty,            tz, 1.0 } ;
+    return  mat4<T>( tmp );
+}
 
 
 template< typename T>
@@ -427,15 +428,15 @@ inline bvu::mat4<T> bvu ::
 lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up )
 {
     vec3<T> n = normalize( center - eye );
-    vec3<T> u = cross( n, normalize( up ) );
+    vec3<T> u = normalize( cross( n, up ) );
     vec3<T> v = cross( u, n );
 
-    mat4<T> result = {  u[0],  u[1],  u[2], -dot( eye, u ),
-                        v[0],  v[1],  v[2], -dot( eye, v ),
-                       -n[0], -n[1], -n[2],  dot( eye, n ),
-                         0.0,   0.0,   0.0,            1.0 };
+    T tmp[16] = {         u[0],          v[0],        -n[0], 0.0,
+                          u[1],          v[1],        -n[1], 0.0,
+                          u[2],          v[2],        -n[2], 0.0,
+                   -dot(eye,u),   -dot(eye,v),   dot(eye,n), 1.0 };
 
-    return result;
+    return mat4<T>( tmp );
 }
 
 
@@ -444,11 +445,11 @@ inline bvu::vec3<T> bvu ::
 project ( const vec4<T> & obj, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport )
 {
     vec4<T> tmp = project * model * obj;
-   tmp /= tmp.w;
+    tmp /= tmp.w;
 
     vec3<T> win;
     win.x = viewport[0] + ( viewport[2] * (tmp.x + 1.0) ) / 2.0;
-    win.z = viewport[1] + ( viewport[3] * (tmp.y + 1.0) ) / 2.0;
+    win.y = viewport[1] + ( viewport[3] * (tmp.y + 1.0) ) / 2.0;
     win.z = (tmp.z + 1.0) / 2.0;
 
     return win;
@@ -490,6 +491,7 @@ scale( const mat4<T> & m, const vec3<T> & s )
     return result;
 }
 
+// derivation : http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToMatrix/
 template< typename T>
 inline bvu::mat4<T> bvu ::
 rotate( const mat4<T> & m, const T & angle, const vec3<T> & v )
