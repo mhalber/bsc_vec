@@ -19,7 +19,7 @@ namespace bvu
     T distance ( const vecX<T> & a, const vecX<T> & b );
 
     template< typename T, template <typename Q> class vecX >
-    vecX<T> normalize ( const vecX<T> & a ); // this will only be called if the vector we are passing is const!
+    vecX<T> normalize ( const vecX<T> & a );
 
     template< typename T, template <typename Q> class vecX >
     vecX<T> abs ( const vecX<T> & a );

@@ -482,6 +482,56 @@ bvuQuatDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
     return bvu::dot( q1, q2 );
 }
 
+
+glm::mat4
+glmTranslate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::translate( m, v );
+}
+
+bvu::mat4f
+bvuTranslate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::translate( m, v );
+}
+
+glm::mat4
+glmScale( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::scale( m, v );
+}
+
+bvu::mat4f
+bvuScale( const std::vector<float> mat_vals, const std::vector<float> & vec_vals )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::scale( m, v );
+}
+
+glm::mat4
+glmRotate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals, float angle )
+{
+    glm::mat4 m = InitGLMMat4( mat_vals );
+    glm::vec3 v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return glm::rotate( m, angle, v );
+}
+
+bvu::mat4f
+bvuRotate( const std::vector<float> mat_vals, const std::vector<float> & vec_vals, float angle )
+{
+    bvu::mat4f m ( &mat_vals[0] );
+    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bvu::rotate( m, bsc::deg2rad(angle), v );
+}
+
+
 void
 RunTests()
 {
@@ -603,6 +653,18 @@ RunTests()
     else                                                                 printf("%-30s- failed!\n", "Quaternion Inverse");
 
 
-    // glu functions
+    // Glu functions
+
+
+    // Transforms
+    if ( CompareResults( glmTranslate, bvuTranslate, data_mat4_A, data_vec4_A ) ) printf("%-30s- passed!\n", "Translation Matrix");
+    else                                                                          printf("%-30s- failed!\n", "Translation Matrix");
+
+    if ( CompareResults( glmScale, bvuScale, data_mat4_A, data_vec4_A ) ) printf("%-30s- passed!\n", "Scaling Matrix");
+    else                                                                  printf("%-30s- failed!\n", "Scaling Matrix");
+
+    if ( CompareResults( glmRotate, bvuRotate, data_mat4_A, data_vec4_A, 45.0 ) ) printf("%-30s- passed!\n", "Rotation Matrix");
+    else                                                                          printf("%-30s- failed!\n", "Rotation Matrix");
+
 
 }

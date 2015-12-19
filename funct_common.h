@@ -65,14 +65,14 @@ namespace bsc
 
     template <typename T>
     inline T
-    deg2Rad ( T deg )
+    deg2rad ( T deg )
     {
         return deg * M_PI / 180.0;
     }
 
     template <typename T>
     inline T
-    rad2Deg ( T rad )
+    rad2deg ( T rad )
     {
         return rad * 180.0 / M_PI;
     }

@@ -22,28 +22,31 @@ namespace bvu
 
     // TODO: implement these functions
     template< typename T>
-    void lookAt();
+    mat4<T> lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up );
 
     template< typename T>
-    void perspective();
+    mat4<T> perspective ( const T & fovy, const T & aspect, const T & z_far, const T & z_near);
 
     template< typename T>
-    void ortho();
+    mat4<T> frustum ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far );
 
     template< typename T>
-    void project();
+    mat4<T> ortho ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far );
 
     template< typename T>
-    void unproject();
+    vec3<T> project ( const vec4<T> & obj, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport );
 
     template< typename T>
-    void translate();
+    vec4<T> unproject ( const vec3<T> & win, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport );
 
     template< typename T>
-    void scale();
+    mat4<T> translate( const mat4<T> & m, const vec3<T> & t );
 
     template< typename T>
-    void rotate();
+    mat4<T> scale( const mat4<T> & m, const vec3<T> & s );
+
+    template< typename T>
+    mat4<T> rotate( const mat4<T> & m, const T & angle, const vec3<T> & axis );
 }
 
 
@@ -367,4 +370,163 @@ inverse ( const matX<T> & mat )
     matX<T> mat_copy ( mat );
     compute_inverse( mat_copy );
     return mat_copy;
+}
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+perspective ( const T & fovy, const T & aspect, const T & z_far, const T & z_near)
+{
+    T f = tan( 0.5 * M_PI - fovy );
+    T diff = z_near - z_far;
+    mat4<T> result = { f / aspect, 0.0,                           0.0,  0.0,
+                              0.0,   f,                           0.0,  0.0,
+                              0.0, 0.0,       (z_far + z_near) / diff, -1.0,
+                              0.0, 0.0, (2.0 * z_far * z_near) / diff,  0.0 };
+    return result;
+}
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+frustum ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far )
+{
+    T x_diff = right - left;
+    T y_diff = top - bottom;
+    T z_diff = z_far - z_near;
+    T a = (right + left) / x_diff;
+    T b = (top + bottom) / y_diff;
+    T c = -(z_far + z_near ) / z_diff;
+    T d = -(2 * z_far * z_near ) / z_diff;
+
+    mat4<T> result = { (2 * z_near) / x_diff,                   0.0, 0.0,  0.0,
+                                         0.0, (2 * z_near) / y_diff, 0.0,  0.0,
+                                           a,                     b,   c, -1.0,
+                                         0.0,                   0.0,   d,  0.0 };
+    return result;
+}
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+ortho ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far )
+{
+    T x_diff = right - left;
+    T y_diff = top - bottom;
+    T z_diff = z_far - z_near;
+    T tx = - ( right + left ) / x_diff;
+    T ty = - ( top + bottom ) / y_diff;
+    T tz = - ( z_near + z_far ) / z_diff;
+
+    mat4<T> result = { 2.0 / x_diff,          0.0,           0.0, 0.0,
+                                0.0, 2.0 / x_diff,           0.0, 0.0,
+                                0.0,          0.0, -2.0 / z_diff, 0.0,
+                                 tx,           ty,            tz, 1.0 };
+    return result;}
+
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up )
+{
+    vec3<T> n = normalize( center - eye );
+    vec3<T> u = cross( n, normalize( up ) );
+    vec3<T> v = cross( u, n );
+
+    mat4<T> result = {  u[0],  u[1],  u[2], -dot( eye, u ),
+                        v[0],  v[1],  v[2], -dot( eye, v ),
+                       -n[0], -n[1], -n[2],  dot( eye, n ),
+                         0.0,   0.0,   0.0,            1.0 };
+
+    return result;
+}
+
+
+template< typename T>
+inline bvu::vec3<T> bvu ::
+project ( const vec4<T> & obj, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport )
+{
+    vec4<T> tmp = project * model * obj;
+   tmp /= tmp.w;
+
+    vec3<T> win;
+    win.x = viewport[0] + ( viewport[2] * (tmp.x + 1.0) ) / 2.0;
+    win.z = viewport[1] + ( viewport[3] * (tmp.y + 1.0) ) / 2.0;
+    win.z = (tmp.z + 1.0) / 2.0;
+
+    return win;
+}
+
+template< typename T>
+inline bvu::vec4<T> bvu ::
+unproject ( const vec3<T> &win, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport )
+{
+    mat4<T> inv_pm = inverse( project * model );
+    vec4<T> tmp;
+    tmp.x = ( 2.0 * ( win.x - viewport[0] ) ) / viewport[2] - 1.0;
+    tmp.y = ( 2.0 * ( win.y - viewport[1] ) ) / viewport[3] - 1.0;
+    tmp.z = 2.0 * win.z - 1.0;
+    tmp.w = 1.0;
+
+    vec4<T> obj = inv_pm * tmp;
+    obj /= obj.w;
+    return obj;
+}
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+translate( const mat4<T> & m, const vec3<T> & t )
+{
+    mat4<T> result( m );
+    result[3] = m[0] * t.x + m[1] * t.y + m[2] * t.z + m[3];
+    return result;
+}
+
+    template< typename T>
+inline bvu::mat4<T> bvu ::
+scale( const mat4<T> & m, const vec3<T> & s )
+{
+    mat4<T> result( m );
+    result[0] *= s.x;
+    result[1] *= s.y;
+    result[2] *= s.z;
+    return result;
+}
+
+template< typename T>
+inline bvu::mat4<T> bvu ::
+rotate( const mat4<T> & m, const T & angle, const vec3<T> & v )
+{
+    T c = cos ( angle );
+    T s = sin ( angle );
+    T t = 1.0 - c;
+
+    vec3<T> axis = normalize( v );
+
+    mat4<T> rotate( false );
+    rotate[0][0] = c + axis.x * axis.x * t;
+    rotate[1][1] = c + axis.y * axis.y * t;
+    rotate[2][2] = c + axis.z * axis.z * t;
+
+    T tmp_1 = axis.x * axis.y * t;
+    T tmp_2 = axis.z * s;
+
+    rotate[0][1] = tmp_1 + tmp_2;
+    rotate[1][0] = tmp_1 - tmp_2;
+
+    tmp_1 = axis.x * axis.z * t;
+    tmp_2 = axis.y * s;
+
+    rotate[0][2] = tmp_1 - tmp_2;
+    rotate[2][0] = tmp_1 + tmp_2;
+
+    tmp_1 = axis.y * axis.z * t;
+    tmp_2 = axis.x * s;
+
+    rotate[1][2] = tmp_1 + tmp_2;
+    rotate[2][1] = tmp_1 - tmp_2;
+
+    mat4<T> result( m );
+    result[0] = m[0] * rotate[0][0] + m[1] * rotate[0][1] + m[2] * rotate[0][2];
+    result[1] = m[0] * rotate[1][0] + m[1] * rotate[1][1] + m[2] * rotate[1][2];
+    result[2] = m[0] * rotate[2][0] + m[1] * rotate[2][1] + m[2] * rotate[2][2];
+    result[3] = m[3];
+    return result;
 }

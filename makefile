@@ -12,8 +12,7 @@ OBJS = $(SRCS:%.cpp=$(OUT_DIR)%.o)
 # Compile and link options
 CC = clang++
 WARNINGS = -Wall
-CPPFLAGS = -std=c++14 -O3 -I. -I../ReferenceCode/ -g0
- # -fopenmp
+CPPFLAGS = -std=c++14 -Os -I. -ggdb
 
 # Libraries
 LIBS = -lm
