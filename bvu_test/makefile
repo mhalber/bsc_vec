@@ -1,5 +1,5 @@
 # Executable name
-EXE_NAME = mathTest.out
+EXE_NAME = bvuTest.exe
 
 # Useful Directories
 BIN_DIR = ./
@@ -12,16 +12,16 @@ OBJS = $(SRCS:%.cpp=$(OUT_DIR)%.o)
 # Compile and link options
 CC = clang++
 WARNINGS = -Wall
-CPPFLAGS = -std=c++14 -Os -I. -ggdb
+CPPFLAGS = -std=c++14 -Os -I. -I../ -ggdb
 
 # Libraries
 LIBS = -lm
 
 
 # Make targets
-all: clean MathTest
+all: clean bvuTest
 
-MathTest: $(OBJS)
+bvuTest: $(OBJS)
 		$(CC) $(CPPFLAGS) $(OBJS) $(LIBS) -o ${BIN_DIR}${EXE_NAME}
 
 clean:
