@@ -17,10 +17,10 @@ namespace bvu
         vec2 ( T v );
         vec2 ( T x, T y );
         vec2 ( const vec2<T> &other );
-        // vec2 ( const vec3<T> &other );
-        // vec2 ( const vec4<T> &other );
+        vec2 ( const vec3<T> &other );
+        vec2 ( const vec4<T> &other );
 
-        void operator=( const vec2<T> & other );
+        vec2<T> & operator=( const vec2<T> & other );
 
         void operator+=   ( const vec2<T> & other );
         void operator+=   ( const T constant );
@@ -76,24 +76,23 @@ namespace bvu
     {}
 
 
-    // template <typename T>
-    // vec2<T> ::
-    // vec2 ( const vec3<T> &other ) : x( other.x ), y( other.y )
-    // {}
+    template <typename T>
+    vec2<T> ::
+    vec2 ( const vec3<T> &other ) : x( other.x ), y( other.y )
+    {}
 
-
-    // template <typename T>
-    // vec2<T> ::
-    // vec2 ( const vec4<T> &other ) : x( other.x ), y( other.y )
-    // {}
 
     template <typename T>
-    inline void vec2<T> ::
+    vec2<T> ::
+    vec2 ( const vec4<T> &other ) : x( other.x ), y( other.y )
+    {}
+
+    template <typename T>
+    inline vec2<T> & vec2<T> ::
     operator= ( const vec2<T> & v)
     {
         this->x = v.x;
         this->y = v.y;
-        this->z = v.z;
     }
 
     template <typename T>

@@ -8,7 +8,7 @@ namespace bvu
         union
         {
             T data[9];
-            vec3<T> cols[3]; // laid out in memory as rows, conceptually treated as columns.
+            vec3<T> cols[3];
         };
 
         mat3 ( bool initialize = true );

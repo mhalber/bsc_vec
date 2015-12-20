@@ -51,25 +51,40 @@ namespace bvu
 // Implementation
 //---------------------------------------------------
 
+template< typename T>
+inline T
+compute_dot( const bvu::vec2<T> & a, const bvu::vec2<T> & b )
+{
+    return (a[0] * b[0]) + (a[1] * b[1]);
+}
+
+
+template< typename T>
+inline T
+compute_dot( const bvu::vec3<T> & a, const bvu::vec3<T> & b )
+{
+    return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
+}
+
+template< typename T>
+inline T
+compute_dot( const bvu::vec4<T> & a, const bvu::vec4<T> & b )
+{
+    return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
+}
+
 template< typename T, template <typename Q> class vecX >
 inline T bvu ::
 dot ( const vecX<T> & a, const vecX<T> & b )
 {
-    T dot_prod = 0.0;
-
-    for ( int i = 0 ; i < a.size() ; ++i )
-    {
-        dot_prod += a[i] * b[i];
-    }
-
-    return dot_prod;
+    return compute_dot( a, b );
 }
 
 template< typename T, template <typename Q> class vecX >
 inline T bvu ::
 normSq ( const vecX<T> & a )
 {
-    return dot( a, a );
+    return compute_dot( a, a );
 }
 
 template< typename T, template <typename Q> class vecX >
@@ -90,7 +105,7 @@ template< typename T, template <typename Q> class vecX >
 inline vecX<T> bvu ::
 normalize ( const vecX<T> & a )
 {
-    return a * ( (T)1.0 / std::sqrt( dot( a, a ) ) );
+    return a * ( (T)1.0 / std::sqrt( compute_dot( a, a ) ) );
 }
 
 

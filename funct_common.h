@@ -1,5 +1,7 @@
 #pragma once
 
+// TODO: add proper floating point comparison operations!
+
 namespace bsc
 {
     template <typename T>
@@ -77,7 +79,34 @@ namespace bsc
         return rad * 180.0 / M_PI;
     }
 
-    /*
+    template< int NReps = 1, typename TimeUnit = std::chrono::duration<double>, typename F, typename ...Args >
+    typename TimeUnit::rep MeasureTime ( F function, Args&&... arguments )
+    {
+        auto start = std::chrono::system_clock::now();
+
+        for ( int i = 0 ; i < NReps; ++i )
+        {
+            function( std::forward<Args>(arguments)... );
+        }
+
+        auto duration = std::chrono::duration_cast<TimeUnit>( std::chrono::system_clock::now() - start );
+
+        return duration.count() / (double)NReps;
+    }
+
+    template<typename TimeUnit = std::chrono::duration<double> >
+    struct Timer
+    {
+        std::chrono::time_point<std::chrono::system_clock> s; // start
+        std::chrono::time_point<std::chrono::system_clock> e; // end
+
+        void start () { s = std::chrono::system_clock::now(); }
+        void stop ()  { e = std::chrono::system_clock::now(); }
+        typename TimeUnit::rep duration() { return std::chrono::duration_cast<TimeUnit>( e - s ).count(); }
+        typename TimeUnit::rep elapsed () { return std::chrono::duration_cast<TimeUnit>( std::chrono::system_clock::now() - s ).count(); }
+    };
+
+        /*
     inline bool
     IsPositive( r32 s, r32 epsilon  )
     {
@@ -150,34 +179,5 @@ namespace bsc
         return IsNegativeOrZero( s1 - s2, epsilon );
     }
     */
-
-    // -- time measurements
-
-    template< int NReps = 1, typename TimeUnit = std::chrono::duration<double>, typename F, typename ...Args >
-    typename TimeUnit::rep MeasureTime ( F function, Args&&... arguments )
-    {
-        auto start = std::chrono::system_clock::now();
-
-        for ( int i = 0 ; i < NReps; ++i )
-        {
-            function( std::forward<Args>(arguments)... );
-        }
-
-        auto duration = std::chrono::duration_cast<TimeUnit>( std::chrono::system_clock::now() - start );
-
-        return duration.count() / (double)NReps;
-    }
-
-    template<typename TimeUnit = std::chrono::duration<double> >
-    struct Timer
-    {
-        std::chrono::time_point<std::chrono::system_clock> s; // start
-        std::chrono::time_point<std::chrono::system_clock> e; // end
-
-        void start () { s = std::chrono::system_clock::now(); }
-        void stop ()  { e = std::chrono::system_clock::now(); }
-        typename TimeUnit::rep duration() { return std::chrono::duration_cast<TimeUnit>( e - s ).count(); }
-        typename TimeUnit::rep elapsed () { return std::chrono::duration_cast<TimeUnit>( std::chrono::system_clock::now() - s ).count(); }
-    };
 }
 

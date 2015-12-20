@@ -21,7 +21,7 @@ namespace bvu
         vec3<T> ( const vec2<T> & other, const T v );
         vec3<T> ( const vec4<T> & other );
 
-        void operator= ( const vec3<T> & other );
+        vec3<T> & operator= ( const vec3<T> & other );
 
         void operator+=   ( const vec3<T> & other );
         void operator+=   ( const T constant );
@@ -91,12 +91,13 @@ namespace bvu
     {}
 
     template <typename T>
-    inline void vec3<T> ::
+    inline vec3<T> &  vec3<T> ::
     operator=( const vec3<T> & other )
     {
         this->x = other.x;
         this->y = other.y;
         this->z = other.z;
+        return *this;
     }
 
     template <typename T>

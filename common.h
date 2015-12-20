@@ -1,3 +1,8 @@
+// basics v0.05
+// by Maciej Halber
+
+// This is simple standard include file with utilites that are useful for most of programs that I write
+// This code is public domain
 
 #include <cstdio>
 #include <cstdint>
@@ -20,7 +25,5 @@ typedef uint64_t ui64;
 
 typedef float  r32;
 typedef double r64;
-
-// TODO: add proper floating point comparison operations!
 
 #include "funct_common.h"

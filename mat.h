@@ -23,4 +23,4 @@ namespace bvu
 #include "mat3.h"
 #include "mat4.h"
 
-#include "funct_matrix.h"
+#include "funct_mat.h"

@@ -1,14 +1,19 @@
 
-// Library name -> basic vector utilities
+// basic vector utilities v0.1
+// by Maciej Halber
 
-// TODO: Write tests for mat and vec based on compare results function
-// TODO: Quaternion casrs
-// TODO: change flip to negation operator
-// TODO: Change names from vector to vecX.h and fucntsvecX so its not confused with std::vector
+// This is a small and simple library for basic vector operation, hence the inventive name of basic vector utilities( bvu )
 
+// It implements 2d, 3d and 4d vector and matrix types, alongside with quaternions.
+// Most of the functions can be found in bvu_impl/funct_mat.h, bvu_impl/funct_vec.h and bvu_impl/funct_quat.h, and hopefully are pretty
+// self-explanatory. Besides standard inverse transpose, it also has implementations of useful glu functions ( https://en.wikipedia.org/wiki/OpenGL_Utility_Library )
+
+// This code is in public domain. I'd appreciate contribution, but none is required.
+// This project has been written for educational purposes, and because I wanted to have my own library for vectors and matrices. It is
+// heavily inspired by glm( http://glm.g-truc.net/0.9.7/index.html ) in terms of overall api design.
 
 #include "common.h"
-#include "vector.h"
-#include "matrix.h"
-#include "quaternion.h"
+#include "vec.h"
+#include "mat.h"
+#include "quat.h"
 #include "funct_debug.h"

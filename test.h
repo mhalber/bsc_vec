@@ -6,9 +6,6 @@
 
 #include "bvu.h"
 
-// TODO Tests for transformation functions
-// TODO Tests for quaternions
-
 template< typename T = float, typename F, typename G, typename ...Args>
 bool CompareResults( F functionA, G functionB, Args&&... arguments )
 {
@@ -491,14 +488,12 @@ bvuLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, 
 glm::mat4
 glmPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
 {
-    // bvu::printMat4(glm::perspective( fovy, aspect, z_near, z_far ));
     return glm::perspective( fovy, aspect, z_near, z_far );
 }
 
 bvu::mat4f
 bvuPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
 {
-    // bvu::printMat4(bvu::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far ));
     return bvu::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far );
 }
 
@@ -506,28 +501,24 @@ bvuPerspective ( const float fovy, const float aspect, const float z_near, const
 glm::mat4
 glmFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    // bvu::printMat4(glm::frustum( fovy, aspect, z_near, z_far ));
     return glm::frustum( left, right, bottom, top, z_near, z_far );
 }
 
 bvu::mat4f
 bvuFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    // bvu::printMat4(bvu::frustum( fovy, aspect, z_near, z_far ));
     return bvu::frustum( left, right, bottom, top, z_near, z_far );
 }
 
 glm::mat4
 glmOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    // bvu::printMat4(glm::ortho( fovy, aspect, z_near, z_far ));
     return glm::ortho( left, right, bottom, top, z_near, z_far );
 }
 
 bvu::mat4f
 bvuOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    // bvu::printMat4(bvu::ortho( fovy, aspect, z_near, z_far ));
     return bvu::ortho( left, right, bottom, top, z_near, z_far );
 }
 

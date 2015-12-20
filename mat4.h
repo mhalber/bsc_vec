@@ -8,20 +8,20 @@ namespace bvu
         union
         {
             T data[16];
-            vec4<T> cols[4]; // laid out in memory as rows, conceptually treated as columns.
+            vec4<T> cols[4];
         };
 
-        mat4( bool initialize = true );
-        mat4( const T constant );
-        mat4( const T other[16] );
-        mat4( const mat2<T> & other );
-        mat4( const mat3<T> & other );
-        mat4( const mat4<T> & other );
-        mat4( const vec4<T> & diagonal );
-        mat4( const vec4<T> & col0,
-              const vec4<T> & col1,
-              const vec4<T> & col2,
-              const vec4<T> & col3 );
+        mat4 ( bool initialize = true );
+        mat4 ( const T constant );
+        mat4 ( const T other[16] );
+        mat4 ( const mat2<T> & other );
+        mat4 ( const mat3<T> & other );
+        mat4 ( const mat4<T> & other );
+        mat4 ( const vec4<T> & diagonal );
+        mat4 ( const vec4<T> & col0,
+               const vec4<T> & col1,
+               const vec4<T> & col2,
+               const vec4<T> & col3 );
 
         mat4<T> & operator= ( const mat4<T> & other );
 
