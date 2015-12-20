@@ -11,6 +11,8 @@
 // This code is in public domain. I'd appreciate contribution, but none is required.
 // This project has been written for educational purposes, and because I wanted to have my own library for vectors and matrices. It is
 // heavily inspired by glm( http://glm.g-truc.net/0.9.7/index.html ) in terms of overall api design.
+// In its current version it is not battle hardened and most likely contains many bugs.
+// Feel free to contact me with any comments or suggestions for improvement.
 
 #include "common.h"
 #include "vec.h"
