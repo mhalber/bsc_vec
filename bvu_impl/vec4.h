@@ -26,24 +26,15 @@ namespace bvu
 
         void operator+=   ( const vec4<T> & other );
         void operator+=   ( const T constant );
-        vec4<T> operator+ ( const vec4<T> & other ) const;
-        vec4<T> operator+ ( const T constant ) const;
 
         void operator-=   ( const vec4<T> & other );
         void operator-=   ( const T constant );
-        vec4<T> operator- ( const vec4<T> & other ) const;
-        vec4<T> operator- ( const T constant ) const;
-        vec4<T> operator- () const;
 
         void operator*=   ( const vec4<T> & other );
         void operator*=   ( const T constant );
-        vec4<T> operator* ( const vec4<T> & other ) const;
-        vec4<T> operator* ( const T constant ) const;
 
         void operator/=   ( const vec4<T> & other );
         void operator/=   ( const T constant );
-        vec4<T> operator/ ( const vec4<T> & other ) const;
-        vec4<T> operator/ ( const T constant ) const;
 
         bool operator== ( const vec4<T> & other ) const;
         bool operator!= ( const vec4<T> & other ) const;
@@ -125,20 +116,35 @@ namespace bvu
     }
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator+ ( const vec4<T> & other ) const
+    inline vec4<T>
+    operator+ ( const vec4<T> & v1, const vec4<T> & v2 )
     {
-        vec4<T> result( *this );
-        result += other;
+        vec4<T> result( v1.x + v2.x,
+                        v1.y + v2.y,
+                        v1.z + v2.z,
+                        v1.w + v2.w );
         return result;
     }
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator+ ( const T constant ) const
+    inline vec4<T>
+    operator+ ( const vec4<T> & v, const T constant )
     {
-        vec4<T> result( *this );
-        result += constant;
+        vec4<T> result( v.x + constant,
+                        v.y + constant,
+                        v.z + constant,
+                        v.w + constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec4<T>
+    operator+ ( const T constant, const vec4<T> & v )
+    {
+        vec4<T> result( v.x + constant,
+                        v.y + constant,
+                        v.z + constant,
+                        v.w + constant );
         return result;
     }
 
@@ -165,34 +171,47 @@ namespace bvu
 
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator- ( const vec4<T> & other ) const
+    inline vec4<T>
+    operator- ( const vec4<T> & v1, const vec4<T> & v2 )
     {
-        vec4<T> result( *this );
-        result -= other;
+        vec4<T> result( v1.x - v2.x,
+                        v1.y - v2.y,
+                        v1.z - v2.z,
+                        v1.w - v2.w );
+        return result;
+    }
+
+    template <typename T>
+    inline vec4<T>
+    operator- ( const vec4<T> & v, const T constant )
+    {
+        vec4<T> result( v.x - constant,
+                        v.y - constant,
+                        v.z - constant,
+                        v.w - constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec4<T>
+    operator- ( const T constant, const vec4<T> & v )
+    {
+        vec4<T> result( constant - v.x,
+                        constant - v.y,
+                        constant - v.z,
+                        constant - v.w );
         return result;
     }
 
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator- ( const T constant ) const
+    inline vec4<T>
+    operator- ( const vec4<T> & v )
     {
-        vec4<T> result( *this );
-        result -= constant;
-        return result;
-    }
-
-
-    template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator- () const
-    {
-        vec4<T> result;
-        result.x = -this->x;
-        result.y = -this->y;
-        result.z = -this->z;
-        result.w = -this->w;
+        vec4<T> result( -v.x,
+                        -v.y,
+                        -v.z,
+                        -v.w );
         return result;
     }
 
@@ -219,20 +238,35 @@ namespace bvu
 
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator* ( const vec4<T> & other ) const
+    inline vec4<T>
+    operator* ( const vec4<T> & v1, const vec4<T> & v2 )
     {
-        vec4<T> result( *this );
-        result *= other;
+        vec4<T> result( v1.x * v2.x,
+                        v1.y * v2.y,
+                        v1.z * v2.z,
+                        v1.w * v2.w );
         return result;
     }
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator* ( const T constant ) const
+    inline vec4<T>
+    operator* ( const vec4<T> & v, const T constant )
     {
-        vec4<T> result( *this );
-        result *= constant;
+        vec4<T> result( v.x * constant,
+                        v.y * constant,
+                        v.z * constant,
+                        v.w * constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec4<T>
+    operator* ( const T constant, const vec4<T> & v )
+    {
+        vec4<T> result( v.x * constant,
+                        v.y * constant,
+                        v.z * constant,
+                        v.w * constant );
         return result;
     }
 
@@ -250,28 +284,43 @@ namespace bvu
     inline void vec4<T> ::
     operator/= ( const T constant )
     {
-        T Invconstant = 1.0f / constant;
-        this->x *= Invconstant;
-        this->y *= Invconstant;
-        this->z *= Invconstant;
-        this->w *= Invconstant;
+        T inv_constant = 1.0f / constant;
+        this->x *= inv_constant;
+        this->y *= inv_constant;
+        this->z *= inv_constant;
+        this->w *= inv_constant;
     }
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator/ ( const vec4<T> & other ) const
+    inline vec4<T>
+    operator/ ( const vec4<T> & v1, const vec4<T> & v2 )
     {
-        vec4<T> result( *this );
-        result /= other;
+        vec4<T> result( v1.x / v2.x,
+                        v1.y / v2.y,
+                        v1.z / v2.z,
+                        v1.w / v2.w );
         return result;
     }
 
     template <typename T>
-    inline vec4<T> vec4<T> ::
-    operator/ ( const T constant ) const
+    inline vec4<T>
+    operator/ ( const vec4<T> & v, const T constant )
     {
-        vec4<T> result( *this );
-        result *= ( 1.0f / constant );
+        vec4<T> result( v.x / constant,
+                        v.y / constant,
+                        v.z / constant,
+                        v.w / constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec4<T>
+    operator/ ( const T constant, const vec4<T> & v )
+    {
+        vec4<T> result( constant / v.x,
+                        constant / v.y,
+                        constant / v.z,
+                        constant / v.w );
         return result;
     }
 
@@ -313,78 +362,3 @@ namespace bvu
         return !(*this == other);
     }
 }
-
-
-// Debug Prints
-// inline void
-// print ( const vec2f & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f\n", v.x, v.y );
-// }
-
-// inline void
-// print ( const vec2d & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f\n", v.x, v.y );
-// }
-
-// inline void
-// print ( const vec2i & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5d %5d\n", v.x, v.y );
-// }
-
-
-
-// inline void
-// print ( const vec3f & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f %5.3f\n", v.x, v.y, v.z );
-// }
-
-// inline void
-// print( const vec3d & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f %5.3f\n", v.x, v.y, v.z );
-// }
-
-// inline void
-// print( const vec3i & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5d %5d %5d \n", v.x, v.y, v.z );
-// }
-
-
-
-// inline void
-// print( const vec4f & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f %5.3f %5.3f\n", v.x, v.y, v.z, v.w );
-// }
-
-// inline void
-// print( const vec4d & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5.3f %5.3f %5.3f %5.3f\n", v.x, v.y, v.z, v.w );
-// }
-
-// inline void
-// print( const vec4i & v, FILE * stream = stdout ) {
-//     fprintf ( stream, "%5d %5d %5d %5d\n", v.x, v.y, v.z, v.w );
-// }
-
-////////////////////////////////////////////////////////////////////////////////
-// Old SSE code for possible future reference
-////////////////////////////////////////////////////////////////////////////////
-
-/*
-//calculating Norm
-    __m128 divisor = _mm_Mul_ps(this->test, this->test);
-    divisor = _mm_hAdd_ps(divisor, divisor);
-    divisor = _mm_hAdd_ps(divisor, divisor);
-// calculating 1/Norm
-    divisor = _mm_rsqrt_ps( divisor );
-// Normalizing the vector
-    this->vec4 = _mm_Mul_ps( this->vec4, divisor );
-*/
-
-/*
-void
-printSSEVec( const __m128 vec,  FILE * stream = stdout ) {
-    float res[4];
-    _mm_store_ps( res, vec );
-    fprintf( stream, "%f %f %f %f\n", res[0], res[1], res[2], res[3] );
-}
-*/

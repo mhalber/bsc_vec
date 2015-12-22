@@ -1,10 +1,4 @@
-/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
- * This file defines simple glsl like vector style for 2, 3
- * and 4 dimensions.
- * Author : Maciej Halber
- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
-
-#pragma once // use guards instead?
+#pragma once
 
 namespace bvu
 {

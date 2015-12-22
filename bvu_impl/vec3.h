@@ -25,24 +25,15 @@ namespace bvu
 
         void operator+=   ( const vec3<T> & other );
         void operator+=   ( const T constant );
-        vec3<T> operator+ ( const vec3<T> & other ) const;
-        vec3<T> operator+ ( const T constant ) const;
 
         void operator-=   ( const vec3<T> & other );
         void operator-=   ( const T constant );
-        vec3<T> operator- ( const vec3<T> & other ) const;
-        vec3<T> operator- ( const T constant ) const;
-        vec3<T> operator- () const;
 
         void operator*=   ( const vec3<T> & other );
         void operator*=   ( const T constant );
-        vec3<T> operator* ( const vec3<T> & other ) const;
-        vec3<T> operator* ( const T constant ) const;
 
         void operator/=   ( const vec3<T> & other );
         void operator/=   ( const T constant );
-        vec3<T> operator/ ( const vec3<T> & other ) const;
-        vec3<T> operator/ ( const T constant ) const;
 
         bool operator== ( const vec3<T> & other ) const;
         bool operator!= ( const vec3<T> & other ) const;
@@ -121,21 +112,32 @@ namespace bvu
 
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator+ ( const vec3<T> & other ) const
+    inline vec3<T>
+    operator+ ( const vec3<T> & v1, const vec3<T> & v2 )
     {
-        vec3<T> result( *this );
-        result += other;
+        vec3<T> result( v1.x + v2.x,
+                        v1.y + v2.y,
+                        v1.z + v2.z );
         return result;
     }
 
+    template <typename T>
+    inline vec3<T>
+    operator+ ( const vec3<T> & v, const T constant )
+    {
+        vec3<T> result( v.x + constant,
+                        v.y + constant,
+                        v.z + constant );
+        return result;
+    }
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator+ ( const T constant ) const
+    inline vec3<T>
+    operator+ ( const T constant, const vec3<T> & v )
     {
-        vec3<T> result( *this );
-        result += constant;
+        vec3<T> result( v.x + constant,
+                        v.y + constant,
+                        v.z + constant );
         return result;
     }
 
@@ -149,7 +151,6 @@ namespace bvu
         this->z -= other.z;
     }
 
-
     template <typename T>
     inline void vec3<T> ::
     operator-= ( const T constant )
@@ -161,33 +162,43 @@ namespace bvu
 
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator- ( const vec3<T> & other ) const
+    inline vec3<T>
+    operator- ( const vec3<T> & v1, const vec3<T> & v2 )
     {
-        vec3<T> result( *this );
-        result -= other;
+        vec3<T> result( v1.x - v2.x,
+                        v1.y - v2.y,
+                        v1.z - v2.z );
+        return result;
+    }
+
+    template <typename T>
+    inline vec3<T>
+    operator- ( const vec3<T> & v, const T constant )
+    {
+        vec3<T> result( v.x - constant,
+                        v.y - constant,
+                        v.z - constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec3<T>
+    operator- ( const T constant, const vec3<T> & v )
+    {
+        vec3<T> result( constant - v.x,
+                        constant - v.y,
+                        constant - v.z );
         return result;
     }
 
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator- ( const T constant ) const
+    inline vec3<T>
+    operator- ( const vec3<T> & v )
     {
-        vec3<T> result( *this );
-        result -= constant;
-        return result;
-    }
-
-
-    template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator- () const
-    {
-        vec3<T> result;
-        result.x = -this->x;
-        result.y = -this->y;
-        result.z = -this->z;
+        vec3<T> result( -v.x,
+                        -v.y,
+                        -v.z );
         return result;
     }
 
@@ -201,7 +212,6 @@ namespace bvu
         this->z *= other.z;
     }
 
-
     template <typename T>
     inline void vec3<T> ::
     operator*= ( const T constant )
@@ -213,24 +223,34 @@ namespace bvu
 
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator* ( const vec3<T> & other ) const
+    inline vec3<T>
+    operator* ( const vec3<T> & v1, const vec3<T> & v2 )
     {
-        vec3<T> result( *this );
-        result *= other;
+        vec3<T> result( v1.x * v2.x,
+                        v1.y * v2.y,
+                        v1.z * v2.z );
         return result;
     }
-
 
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator* ( const T constant ) const
+    inline vec3<T>
+    operator* ( const vec3<T> & v, const T constant )
     {
-        vec3<T> result( *this );
-        result *= constant;
+        vec3<T> result( v.x * constant,
+                        v.y * constant,
+                        v.z * constant );
         return result;
     }
 
+    template <typename T>
+    inline vec3<T>
+    operator* ( const T constant, const vec3<T> & v )
+    {
+        vec3<T> result( v.x * constant,
+                        v.y * constant,
+                        v.z * constant );
+        return result;
+    }
 
     template <typename T>
     inline void vec3<T> ::
@@ -239,9 +259,7 @@ namespace bvu
         this->x /= other.x;
         this->y /= other.y;
         this->z /= other.z;
-        this->w /= other.w;
     }
-
 
     template <typename T>
     inline void vec3<T> ::
@@ -253,26 +271,35 @@ namespace bvu
         this->z *= inv_constant;
     }
 
-
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator/( const vec3<T> & other ) const
+    inline vec3<T>
+    operator/ ( const vec3<T> & v1, const vec3<T> & v2 )
     {
-        vec3<T> result( *this );
-        result /= other;
+        vec3<T> result( v1.x / v2.x,
+                        v1.y / v2.y,
+                        v1.z / v2.z );
         return result;
     }
 
-
     template <typename T>
-    inline vec3<T> vec3<T> ::
-    operator/ ( const T constant ) const
+    inline vec3<T>
+    operator/ ( const vec3<T> & v, const T constant )
     {
-        vec3<T> result( *this );
-        result *= ( 1.0f / constant );
+        vec3<T> result( v.x / constant,
+                        v.y / constant,
+                        v.z / constant );
         return result;
     }
 
+    template <typename T>
+    inline vec3<T>
+    operator/ ( const T constant, const vec3<T> & v )
+    {
+        vec3<T> result( constant / v.x,
+                        constant / v.y,
+                        constant / v.z );
+        return result;
+    }
 
     template <typename T>
     inline T vec3<T> ::

@@ -24,24 +24,15 @@ namespace bvu
 
         void operator+=   ( const vec2<T> & other );
         void operator+=   ( const T constant );
-        vec2<T> operator+ ( const vec2<T> & other ) const;
-        vec2<T> operator+ ( const T constant ) const;
 
         void operator-=   ( const vec2<T> & other );
         void operator-=   ( const T constant );
-        vec2<T> operator- ( const vec2<T> & other ) const;
-        vec2<T> operator- ( const T constant ) const;
-        vec2<T> operator- () const;
 
         void operator*=   ( const vec2<T> & other );
         void operator*=   ( const T constant );
-        vec2<T> operator* ( const vec2<T> & other ) const;
-        vec2<T> operator* ( const T constant ) const;
 
         void operator/=   ( const vec2<T> & other );
         void operator/=   ( const T constant );
-        vec2<T> operator/ ( const vec2<T> & other ) const;
-        vec2<T> operator/ ( const T constant ) const;
 
         bool operator== ( const vec2<T> & other ) const;
         bool operator!= ( const vec2<T> & other ) const;
@@ -114,20 +105,29 @@ namespace bvu
 
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator+ ( const vec2<T> & other ) const
+    inline vec2<T>
+    operator+ ( const vec2<T> & v1, const vec2<T> & v2 )
     {
-        vec2<T> result( *this );
-        result += other;
+        vec2<T> result( v1.x + v2.x,
+                        v1.y + v2.y );
         return result;
     }
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator+ ( const T constant ) const
+    inline vec2<T>
+    operator+ ( const vec2<T> & v, const T constant )
     {
-        vec2<T> result( *this );
-        result += constant;
+        vec2<T> result( v.x + constant,
+                        v.y + constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec2<T>
+    operator+ ( const T constant, const vec2<T> & v )
+    {
+        vec2<T> result( v.x + constant,
+                        v.y + constant );
         return result;
     }
 
@@ -140,7 +140,6 @@ namespace bvu
         this->y -= other.y;
     }
 
-
     template <typename T>
     inline void vec2<T> ::
     operator-= ( const T constant )
@@ -151,33 +150,42 @@ namespace bvu
 
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator- ( const vec2<T> & other ) const
+    inline vec2<T>
+    operator- ( const vec2<T> & v1, const vec2<T> & v2 )
     {
-        vec2<T> result( *this );
-        result -= other;
+        vec2<T> result( v1.x - v2.x,
+                        v1.y - v2.y );
+        return result;
+    }
+
+    template <typename T>
+    inline vec2<T>
+    operator- ( const vec2<T> & v, const T constant )
+    {
+        vec2<T> result( v.x - constant,
+                        v.y - constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec2<T>
+    operator- ( const T constant, const vec2<T> & v )
+    {
+        vec2<T> result( constant - v.x,
+                        constant - v.y );
         return result;
     }
 
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator- ( const T constant ) const
+    inline vec2<T>
+    operator- ( const vec2<T> & v )
     {
-        vec2<T> result( *this );
-        result -= constant;
+        vec2<T> result( -v.x,
+                        -v.y );
         return result;
     }
 
-    template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator- () const
-    {
-        vec2<T> result;
-        result.x = -this->x;
-        result.y = -this->y;
-        return result;
-    }
 
     template <typename T>
     inline void vec2<T> ::
@@ -186,7 +194,6 @@ namespace bvu
         this->x *= other.x;
         this->y *= other.y;
     }
-
 
     template <typename T>
     inline void vec2<T> ::
@@ -198,24 +205,31 @@ namespace bvu
 
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator* ( const vec2<T> & other ) const
+    inline vec2<T>
+    operator* ( const vec2<T> & v1, const vec2<T> & v2 )
     {
-        vec2<T> result( *this );
-        result *= other;
+        vec2<T> result( v1.x * v2.x,
+                        v1.y * v2.y );
         return result;
     }
-
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator* ( const T constant ) const
+    inline vec2<T>
+    operator* ( const vec2<T> & v, const T constant )
     {
-        vec2<T> result( *this );
-        result *= constant;
+        vec2<T> result( v.x * constant,
+                        v.y * constant );
         return result;
     }
 
+    template <typename T>
+    inline vec2<T>
+    operator* ( const T constant, const vec2<T> & v )
+    {
+        vec2<T> result( v.x * constant,
+                        v.y * constant );
+        return result;
+    }
 
     template <typename T>
     inline void vec2<T> ::
@@ -225,33 +239,39 @@ namespace bvu
         this->y /= other.y;
     }
 
-
     template <typename T>
     inline void vec2<T> ::
     operator/= ( const T constant )
     {
-        T Invconstant = (T)1.0 / constant;
-        this->x *= Invconstant;
-        this->y *= Invconstant;
+        T inv_constant = 1.0f / constant;
+        this->x *= inv_constant;
+        this->y *= inv_constant;
     }
 
-
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator/ ( const vec2<T> & other ) const
+    inline vec2<T>
+    operator/ ( const vec2<T> & v1, const vec2<T> & v2 )
     {
-        vec2<T> result( *this );
-        result /= other;
+        vec2<T> result( v1.x / v2.x,
+                        v1.y / v2.y );
         return result;
     }
 
+    template <typename T>
+    inline vec2<T>
+    operator/ ( const vec2<T> & v, const T constant )
+    {
+        vec2<T> result( v.x / constant,
+                        v.y / constant );
+        return result;
+    }
 
     template <typename T>
-    inline vec2<T> vec2<T> ::
-    operator/ ( const T constant ) const
+    inline vec2<T>
+    operator/ ( const T constant, const vec2<T> & v )
     {
-        vec2<T> result( *this );
-        result *= ( 1.0f / constant );
+        vec2<T> result( constant / v.x,
+                        constant / v.y );
         return result;
     }
 

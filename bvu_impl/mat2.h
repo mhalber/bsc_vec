@@ -25,25 +25,16 @@ namespace bvu
 
         void operator+= ( const mat2<T> & other );
         void operator+= ( const T constant );
-        mat2<T> operator+ ( const mat2<T> & other ) const;
-        mat2<T> operator+ ( const T constant ) const;
 
         void operator-=( const mat2<T> & other );
         void operator-=( const T constant );
-        mat2<T> operator-( const mat2<T> & other ) const;
-        mat2<T> operator-( const T constant ) const;
 
         void operator*= ( const mat2<T> & other );
         void operator*= ( const T constant );
-        mat2<T> operator* ( const mat2<T> & other ) const;
-        mat2<T> operator* ( const T constant ) const;
-        vec2<T> operator* ( const vec2<T> & v ) const;
-        void pointwiseMultiply ( const mat2<T> &other ); // this is sort of an operator
+        void pointwiseMultiply ( const mat2<T> &other );
 
         void operator/= ( const mat2<T> & other );
         void operator/= ( const T constant );
-        mat2<T> operator/ ( const mat2<T> & other ) const;
-        mat2<T> operator/ ( const T constant ) const;
 
         vec2<T>& operator[] ( unsigned int i );
         vec2<T>  operator[] ( unsigned int i ) const;
@@ -143,87 +134,120 @@ namespace bvu
         cols[1] = col1;
     }
 
-    // Mat2 addition
-
     template <typename T>
     inline void mat2<T>::
     operator+= ( const mat2<T> & other )
     {
-        this->data[0] += other.data[0];
-        this->data[1] += other.data[1];
-        this->data[2] += other.data[2];
-        this->data[3] += other.data[3];
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   += other.data[i];
+            this->data[i+1] += other.data[i+1];
+        }
     }
 
     template <typename T>
     inline void mat2<T>::
     operator+= ( const T constant )
     {
-        this->data[0] += constant;
-        this->data[1] += constant;
-        this->data[2] += constant;
-        this->data[3] += constant;
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   += constant;
+            this->data[i+1] += constant;
+            this->data[i+2] += constant;
+        }
     }
 
     template <typename T>
-    inline mat2<T> mat2<T> :: // TODO inline?
-    operator+ ( const mat2<T> & other ) const
+    inline mat2<T>
+    operator+ ( const mat2<T> & m1, const mat2<T> & m2 )
     {
-        mat2<T> Result( *this );
-        Result += other;
-        return Result;
+        mat2<T> result( m1[0] + m2[0],
+                        m1[1] + m2[1],
+                        m1[2] + m2[2] );
+        return result;
     }
 
     template <typename T>
-    inline mat2<T> mat2<T> ::
-    operator+ ( const T constant ) const
+    inline mat2<T>
+    operator+ ( const mat2<T> & m, const T constant )
     {
-        mat2<T> Result( *this );
-        Result += constant;
-        return Result;
+        mat2<T> result( m[0] + constant,
+                        m[1] + constant,
+                        m[2] + constant);
+        return result;
     }
 
-    // Mat2 substraction
+    template <typename T>
+    inline mat2<T>
+    operator+ ( const T constant, const mat2<T> & m )
+    {
+        mat2<T> result( m[0] + constant,
+                        m[1] + constant,
+                        m[2] + constant );
+        return result;
+    }
+
+
 
     template <typename T>
     inline void mat2<T>::
     operator-= ( const mat2<T> & other )
     {
-        this->data[0] -= other.data[0];
-        this->data[1] -= other.data[1];
-        this->data[2] -= other.data[2];
-        this->data[3] -= other.data[3];
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   -= other.data[i];
+            this->data[i+1] -= other.data[i+1];
+            this->data[i+2] -= other.data[i+2];
+        }
     }
 
     template <typename T>
     inline void mat2<T>::
     operator-= ( const T constant )
     {
-        this->data[0] -= constant;
-        this->data[1] -= constant;
-        this->data[2] -= constant;
-        this->data[3] -= constant;
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   -= constant;
+            this->data[i+1] -= constant;
+            this->data[i+2] -= constant;
+        }
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator- ( const mat2<T> & other ) const
+    inline mat2<T>
+    operator- ( const mat2<T> & m1, const mat2<T> & m2 )
     {
-        mat2<T> Result( *this );
-        Result -= other;
-        return Result;
+        mat2<T> result( m1[0] - m2[0],
+                        m1[1] - m2[1] );
+        return result;
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator- ( const T constant ) const
+    inline mat2<T>
+    operator- ( const mat2<T> & m, const T constant )
     {
-        mat2<T> Result( *this );
-        Result -= constant;
-        return Result;
+        mat2<T> result( m[0] - constant,
+                        m[1] - constant );
+        return result;
     }
 
-    // Mat2 multiplication
+    template <typename T>
+    inline mat2<T>
+    operator- ( const T constant, const mat2<T> & m )
+    {
+        mat2<T> result( constant - m[0],
+                        constant - m[1] );
+        return result;
+    }
+
+    template <typename T>
+    inline mat2<T>
+    operator- ( const mat2<T> & m )
+    {
+        mat2<T> result( -m[0],
+                        -m[1] );
+        return result;
+    }
 
     template <typename T>
     inline void mat2<T>::
@@ -233,11 +257,14 @@ namespace bvu
 
         vals[0] = other.data[0] * data[0] + other.data[1] * data[2];
         vals[1] = other.data[0] * data[1] + other.data[1] * data[3];
+
         vals[2] = other.data[2] * data[0] + other.data[3] * data[2];
         vals[3] = other.data[2] * data[1] + other.data[3] * data[3];
 
-        for ( int i = 0 ; i < 4 ; ++i ) {
-            data[i] = vals[i];
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   = vals[i]  ;
+            this->data[i+1] = vals[i+1];
         }
     }
 
@@ -245,38 +272,56 @@ namespace bvu
     inline void mat2<T>::
     operator*= ( const T constant )
     {
-        for ( int i = 0 ; i < 4 ; ++i )
+        for ( int i = 0 ; i < 4 ; i += 2 )
         {
-            data[i] *= constant;
+            this->data[i]   *= constant;
+            this->data[i+1] *= constant;
         }
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator* ( const mat2<T> & other ) const
+    inline mat2<T>
+    operator* ( const mat2<T> & m1, const mat2<T> & m2 )
     {
-        mat2<T> Result( *this );
-        Result *= other;
-        return Result;
+        T vals[4];
+
+        vals[0] = m2.data[0] * m1.data[0] + m2.data[1] * m1.data[2];
+        vals[1] = m2.data[0] * m1.data[1] + m2.data[1] * m1.data[3];
+
+        vals[2] = m2.data[2] * m1.data[0] + m2.data[3] * m1.data[2];
+        vals[3] = m2.data[2] * m1.data[1] + m2.data[3] * m1.data[3];
+
+
+        mat2<T> result( vals );
+        return result;
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator* ( const T constant ) const
+    inline mat2<T>
+    operator* ( const mat2<T> & m, const T constant )
     {
-        mat2<T> Result( *this );
-        Result *= constant;
-        return Result;
+        mat2<T> result( m[0] * constant,
+                        m[1] * constant );
+        return result;
     }
 
     template <typename T>
-    inline vec2<T> mat2<T>::
-    operator* ( const vec2<T> & v ) const
+    inline mat2<T>
+    operator* ( const T constant, const mat2<T> & m )
+    {
+        mat2<T> result( m[0] * constant,
+                        m[1] * constant );
+        return result;
+    }
+
+    template <typename T>
+    inline vec2<T>
+    operator* ( const mat2<T> & m, const vec3<T> & v )
     {
         vec2<T> output;
 
-        output.x = data[0] * v.x + data[2] * v.y;
-        output.y = data[1] * v.x + data[3] * v.y;
+        output.x = m.data[0] * v.x + m.data[2] * v.y;
+        output.y = m.data[1] * v.x + m.data[3] * v.y;
 
         return output;
     }
@@ -285,13 +330,13 @@ namespace bvu
     inline void mat2<T>::
     pointwiseMultiply ( const mat2<T> & other )
     {
-        for ( int i = 0 ; i < 4 ; ++i )
+        for ( int i = 0 ; i < 4 ; i += 2 )
         {
-            data[i] *= other.data[i];
+            this->data[i]   *= other.data[i];
+            this->data[i+1] *= other.data[i+1];
         }
     }
 
-    // Mat2 division
 
     template <typename T>
     inline void mat2<T>::
@@ -305,28 +350,42 @@ namespace bvu
     inline void mat2<T>::
     operator/= ( const T constant )
     {
-        float inv_constant = (T)1.0 / (T)constant;
-        for ( int i = 0 ; i < 4 ; ++i ) {
-            data[i] *= inv_constant;
+        float inv_constant = (T)1.0 / constant;
+        for ( int i = 0 ; i < 4 ; i += 2 )
+        {
+            this->data[i]   *= inv_constant;
+            this->data[i+1] *= inv_constant;
         }
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator/ ( const mat2<T> & other ) const
+    inline mat2<T>
+    operator/ ( const mat2<T> & m1, const mat2<T> & m2 )
     {
-        mat2<T> Result( *this );
-        Result /= other;
-        return Result;
+        mat2<T> result( m1 );
+        result /= m2;
+        return result;
     }
 
     template <typename T>
-    inline mat2<T> mat2<T>::
-    operator/ ( const T constant ) const
+    inline mat2<T>
+    operator/ ( const mat2<T> & m, const T constant )
     {
-        mat2<T> Result( *this );
-        Result /= constant;
-        return Result;
+        float inv_constant = (T)1.0 / constant;
+        mat2<T> result( m[0] * inv_constant,
+                        m[1] * inv_constant,
+                        m[2] * inv_constant );
+        return result;
+    }
+
+    template <typename T>
+    inline mat2<T>
+    operator/ ( const T constant, const mat2<T> & m )
+    {
+        mat2<T> result( constant / m[0],
+                        constant / m[1],
+                        constant / m[2] );
+        return result;
     }
 
     template <typename T>
