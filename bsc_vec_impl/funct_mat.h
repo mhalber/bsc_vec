@@ -6,7 +6,7 @@
 //---------------------------------------------------
 // Interface
 //---------------------------------------------------
-namespace bvu
+namespace bsc
 {
     template< typename T, template <typename Q> class matX >
     T determinant ( const matX<T> & mat );
@@ -57,14 +57,14 @@ namespace bvu
 
 template <typename T>
 inline T
-compute_determinant ( const bvu::mat2<T> & mat )
+compute_determinant ( const bsc::mat2<T> & mat )
 {
     return ( mat.data[0] * mat.data[3] - mat.data[2] * mat.data[1] );
 }
 
 template <typename T>
 inline T
-compute_determinant ( const bvu::mat3<T> & mat )
+compute_determinant ( const bsc::mat3<T> & mat )
 {
     // code folows same intuition as inverse calculation for 3d matrices, however we only compute information needed
     // for determinant calculation.
@@ -80,7 +80,7 @@ compute_determinant ( const bvu::mat3<T> & mat )
 }
 
 template <typename T>
-T compute_determinant ( const bvu::mat4<T> & mat )
+T compute_determinant ( const bsc::mat4<T> & mat )
 {
     // code folows same intuition as inverse calculation for 4d matrices, however we only compute information needed
     // for determinant calculation.
@@ -108,7 +108,7 @@ T compute_determinant ( const bvu::mat4<T> & mat )
 }
 
 template< typename T, template <typename Q> class matX >
-inline T bvu ::
+inline T bsc ::
 determinant ( const matX<T> & mat )
 {
     return compute_determinant ( mat );
@@ -118,7 +118,7 @@ determinant ( const matX<T> & mat )
 
 
 template< typename T, template <typename Q> class matX >
-inline T bvu ::
+inline T bsc ::
 trace ( const matX<T> & mat )
 {
     T trace = (T)0;
@@ -131,10 +131,10 @@ trace ( const matX<T> & mat )
 
 
 template< typename T >
-inline bvu::mat2<T>
-compute_transpose ( const bvu::mat2<T> & src )
+inline bsc::mat2<T>
+compute_transpose ( const bsc::mat2<T> & src )
 {
-    bvu::mat2<T> trg ( false );
+    bsc::mat2<T> trg ( false );
     trg[0][0] = src[0][0];
     trg[0][1] = src[1][0];
     trg[1][0] = src[0][1];
@@ -143,10 +143,10 @@ compute_transpose ( const bvu::mat2<T> & src )
 }
 
 template< typename T >
-inline bvu::mat3<T>
-compute_transpose ( const bvu::mat3<T> & src )
+inline bsc::mat3<T>
+compute_transpose ( const bsc::mat3<T> & src )
 {
-    bvu::mat3<T> trg ( false );
+    bsc::mat3<T> trg ( false );
     trg[0][0] = src[0][0];
     trg[0][1] = src[1][0];
     trg[0][2] = src[2][0];
@@ -163,10 +163,10 @@ compute_transpose ( const bvu::mat3<T> & src )
 }
 
 template< typename T >
-inline bvu::mat4<T>
-compute_transpose ( const bvu::mat4<T> & src )
+inline bsc::mat4<T>
+compute_transpose ( const bsc::mat4<T> & src )
 {
-    bvu::mat4<T> trg ( false );
+    bsc::mat4<T> trg ( false );
     trg[0][0] = src[0][0];
     trg[0][1] = src[1][0];
     trg[0][2] = src[2][0];
@@ -191,7 +191,7 @@ compute_transpose ( const bvu::mat4<T> & src )
 }
 
 template< typename T, template <typename Q> class matX >
-inline matX<T> bvu ::
+inline matX<T> bsc ::
 transpose ( const matX<T> & mat )
 {
     return compute_transpose( mat );
@@ -200,7 +200,7 @@ transpose ( const matX<T> & mat )
 
 template <typename T>
 void
-compute_inverse ( bvu::mat2<T> & mat )
+compute_inverse ( bsc::mat2<T> & mat )
 {
     T one_over_det = ((T)1.0) / Determinant( mat );
 
@@ -218,7 +218,7 @@ compute_inverse ( bvu::mat2<T> & mat )
 
 template <typename T>
 void
-compute_inverse ( bvu::mat3<T> & mat )
+compute_inverse ( bsc::mat3<T> & mat )
 {
     // To calculate inverse :
     //     1. Transpose M
@@ -270,7 +270,7 @@ compute_inverse ( bvu::mat3<T> & mat )
 
 template <typename T>
 void
-compute_inverse ( bvu::mat4<T> & mat )
+compute_inverse ( bsc::mat4<T> & mat )
 {
     // TODO(maciej) : find intel document that was describing that
     // Inverse using cramers rule
@@ -363,7 +363,7 @@ compute_inverse ( bvu::mat4<T> & mat )
 }
 
 template< typename T, template <typename Q> class matX >
-inline matX<T> bvu ::
+inline matX<T> bsc ::
 inverse ( const matX<T> & mat )
 {
     static_assert(std::numeric_limits<T>::is_iec559, "'Inverse' only accepts real numbers!");
@@ -373,7 +373,7 @@ inverse ( const matX<T> & mat )
 }
 
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 perspective ( const T & fovy, const T & aspect, const T & z_near, const T & z_far)
 {
     T f = tan( 0.5 * (M_PI - fovy) );
@@ -386,7 +386,7 @@ perspective ( const T & fovy, const T & aspect, const T & z_near, const T & z_fa
 }
 
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 frustum ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far )
 {
     T x_diff = right - left;
@@ -405,7 +405,7 @@ frustum ( const T & left, const T & right, const T & bottom, const T & top, cons
 }
 
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 ortho ( const T & left, const T & right, const T & bottom, const T & top, const T & z_near, const T & z_far )
 {
     T x_diff = right - left;
@@ -424,7 +424,7 @@ ortho ( const T & left, const T & right, const T & bottom, const T & top, const 
 
 
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up )
 {
     vec3<T> n = normalize( center - eye );
@@ -441,7 +441,7 @@ lookAt ( const vec3<T> & eye, const vec3<T> & center, const vec3<T> & up )
 
 
 template< typename T>
-inline bvu::vec3<T> bvu ::
+inline bsc::vec3<T> bsc ::
 project ( const vec4<T> & obj, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport )
 {
     vec4<T> tmp = project * model * obj;
@@ -456,7 +456,7 @@ project ( const vec4<T> & obj, const mat4<T> & model, const mat4<T> & project, c
 }
 
 template< typename T>
-inline bvu::vec4<T> bvu ::
+inline bsc::vec4<T> bsc ::
 unproject ( const vec3<T> &win, const mat4<T> & model, const mat4<T> & project, const vec4<T> & viewport )
 {
     mat4<T> inv_pm = inverse( project * model );
@@ -472,7 +472,7 @@ unproject ( const vec3<T> &win, const mat4<T> & model, const mat4<T> & project, 
 }
 
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 translate( const mat4<T> & m, const vec3<T> & t )
 {
     mat4<T> result( m );
@@ -481,7 +481,7 @@ translate( const mat4<T> & m, const vec3<T> & t )
 }
 
     template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 scale( const mat4<T> & m, const vec3<T> & s )
 {
     mat4<T> result( m );
@@ -493,7 +493,7 @@ scale( const mat4<T> & m, const vec3<T> & s )
 
 // derivation : http://www.euclideanspace.com/maths/geometry/rotations/conversions/angleToMatrix/
 template< typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 rotate( const mat4<T> & m, const T & angle, const vec3<T> & v )
 {
     T c = cos ( angle );

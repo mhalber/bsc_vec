@@ -14,8 +14,8 @@
 // In its current version it is not battle hardened and most likely contains many bugs.
 // Feel free to contact me with any comments or suggestions for improvement.
 
-#include "bvu_impl/common.h"
-#include "bvu_impl/vec.h"
-#include "bvu_impl/mat.h"
-#include "bvu_impl/quat.h"
-#include "bvu_impl/funct_debug.h"
+#include "bsc_vec_impl/common.h"
+#include "bsc_vec_impl/vec.h"
+#include "bsc_vec_impl/mat.h"
+#include "bsc_vec_impl/quat.h"
+#include "bsc_vec_impl/funct_debug.h"

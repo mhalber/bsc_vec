@@ -3,7 +3,7 @@
 //---------------------------------------------------
 // Interface
 //---------------------------------------------------
-namespace bvu
+namespace bsc
 {
     template <typename T>
     T dot ( const quat<T> & q1,  const quat<T> & q2 );
@@ -40,33 +40,33 @@ namespace bvu
 //---------------------------------------------------
 
 template <typename T>
-inline T bvu ::
+inline T bsc ::
 dot ( const quat<T> & q1, const quat<T> & q2 )
 {
-    return q1.re * q2.re + bvu::dot( q1.im, q2.im );
+    return q1.re * q2.re + bsc::dot( q1.im, q2.im );
 }
 
 template <typename T>
-inline T bvu ::
+inline T bsc ::
 norm ( const quat<T> & q )
 {
-    return std::sqrt( bvu::dot( q, q ) );
+    return std::sqrt( bsc::dot( q, q ) );
 }
 
 template <typename T>
-inline T bvu ::
+inline T bsc ::
 normSq ( const quat<T> & q )
 {
-    return bvu::dot( q, q );
+    return bsc::dot( q, q );
 }
 
 
 template <typename T>
-inline bvu::quat<T> bvu ::
+inline bsc::quat<T> bsc ::
 inverse ( const quat<T> & q )
 {
     quat<T> p( q );
-    T Normalization = bvu::normSq( p );
+    T Normalization = bsc::normSq( p );
     p.re /= Normalization;
     p.im = -p.im;
     p.im /= Normalization;
@@ -74,7 +74,7 @@ inverse ( const quat<T> & q )
 }
 
 template <typename T>
-inline bvu::quat<T> bvu ::
+inline bsc::quat<T> bsc ::
 conjugate ( const quat<T> & q )
 {
     quat<T> p( q );
@@ -84,7 +84,7 @@ conjugate ( const quat<T> & q )
 
 // derivation http://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/
 template <typename T>
-inline bvu::mat3<T> bvu ::
+inline bsc::mat3<T> bsc ::
 to_mat3 ( const quat<T> & q )
 {
     mat3<T> m(false);
@@ -115,7 +115,7 @@ to_mat3 ( const quat<T> & q )
 }
 
 template <typename T>
-inline bvu::mat4<T> bvu ::
+inline bsc::mat4<T> bsc ::
 to_mat4 ( const quat<T> & q )
 {
     return mat4<T>( to_mat3( q ) );
@@ -123,7 +123,7 @@ to_mat4 ( const quat<T> & q )
 
 // derivation  http://www.euclideanspace.com/maths/geometry/rotations/conversions/matrixToQuaternion/
 template <typename T>
-inline bvu::quat<T> bvu ::
+inline bsc::quat<T> bsc ::
 to_quat ( const mat3<T> & m )
 {
     float tr = m[0][0] + m[1][1] + m[2][2];
@@ -163,7 +163,7 @@ to_quat ( const mat3<T> & m )
 }
 
 template <typename T>
-inline bvu::quat<T> bvu ::
+inline bsc::quat<T> bsc ::
 to_quat ( const mat4<T> & m )
 {
     return to_quat( mat3<T>(m) );

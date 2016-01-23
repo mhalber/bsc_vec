@@ -1,5 +1,5 @@
 # Executable name
-EXE_NAME = bvuTest.exe
+EXE_NAME = bsc_vec_test.exe
 
 # Useful Directories
 BIN_DIR = ./

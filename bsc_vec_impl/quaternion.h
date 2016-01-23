@@ -1,5 +1,6 @@
 #pragma once
-namespace bvu
+
+namespace bsc
 {
     template <typename T>
     struct quat
@@ -171,10 +172,10 @@ namespace bvu
     inline void quat<T>::
     operator*= ( const quat<T> & other )
     {
-        T tmp_re = this->re * other.re - bvu::dot( this->im, other.im );
+        T tmp_re = this->re * other.re - bsc::dot( this->im, other.im );
         vec3<T> tmp_im = other.im * this->re  +
                          this->im * other.re +
-                         bvu::cross( this->im, other.im );
+                         bsc::cross( this->im, other.im );
 
         this->re = tmp_re;
         this->im = tmp_im;

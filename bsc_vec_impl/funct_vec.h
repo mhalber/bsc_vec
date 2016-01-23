@@ -3,7 +3,7 @@
 //---------------------------------------------------
 // Interface
 //---------------------------------------------------
-namespace bvu
+namespace bsc
 {
 
     template< typename T, template <typename Q> class vecX >
@@ -53,7 +53,7 @@ namespace bvu
 
 template< typename T>
 inline T
-compute_dot( const bvu::vec2<T> & a, const bvu::vec2<T> & b )
+compute_dot( const bsc::vec2<T> & a, const bsc::vec2<T> & b )
 {
     return (a[0] * b[0]) + (a[1] * b[1]);
 }
@@ -61,48 +61,48 @@ compute_dot( const bvu::vec2<T> & a, const bvu::vec2<T> & b )
 
 template< typename T>
 inline T
-compute_dot( const bvu::vec3<T> & a, const bvu::vec3<T> & b )
+compute_dot( const bsc::vec3<T> & a, const bsc::vec3<T> & b )
 {
     return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]);
 }
 
 template< typename T>
 inline T
-compute_dot( const bvu::vec4<T> & a, const bvu::vec4<T> & b )
+compute_dot( const bsc::vec4<T> & a, const bsc::vec4<T> & b )
 {
     return (a[0] * b[0]) + (a[1] * b[1]) + (a[2] * b[2]) + (a[3] * b[3]);
 }
 
 template< typename T, template <typename Q> class vecX >
-inline T bvu ::
+inline T bsc ::
 dot ( const vecX<T> & a, const vecX<T> & b )
 {
     return compute_dot( a, b );
 }
 
 template< typename T, template <typename Q> class vecX >
-inline T bvu ::
+inline T bsc ::
 normSq ( const vecX<T> & a )
 {
     return compute_dot( a, a );
 }
 
 template< typename T, template <typename Q> class vecX >
-inline T bvu ::
+inline T bsc ::
 norm ( const vecX<T> & a )
 {
     return std::sqrt( normSq( a ) );
 }
 
 template< typename T, template <typename Q> class vecX >
-inline T bvu ::
+inline T bsc ::
 distance ( const vecX<T> & a, const vecX<T> & b )
 {
     return norm( a - b );
 }
 
 template< typename T, template <typename Q> class vecX >
-inline vecX<T> bvu ::
+inline vecX<T> bsc ::
 normalize ( const vecX<T> & a )
 {
     return a * ( (T)1.0 / std::sqrt( compute_dot( a, a ) ) );
@@ -110,7 +110,7 @@ normalize ( const vecX<T> & a )
 
 
 template< typename T, template <typename Q> class vecX >
-inline vecX<T> bvu ::
+inline vecX<T> bsc ::
 abs ( const vecX<T> & a )
 {
     vecX<T> b;
@@ -123,7 +123,7 @@ abs ( const vecX<T> & a )
 
 
 template< typename T, template <typename Q> class vecX >
-inline vecX<T> bvu ::
+inline vecX<T> bsc ::
 clamp ( const vecX<T> & a, const T val_min, const T val_max )
 {
     vecX<T> b;
@@ -137,7 +137,7 @@ clamp ( const vecX<T> & a, const T val_min, const T val_max )
 }
 
 template< typename T >
-inline bvu::vec3<T> bvu ::
+inline bsc::vec3<T> bsc ::
 cross ( const vec3<T> & a, const vec3<T> & b )
 {
     return vec3<T>( ( a.y * b.z - a.z * b.y ),
@@ -145,35 +145,35 @@ cross ( const vec3<T> & a, const vec3<T> & b )
                     ( a.x * b.y - a.y * b.x ) );
 }
 template< typename T >
-inline T bvu ::
+inline T bsc ::
 parallelogramArea ( const vec3<T> & a, const vec3<T> & b )
 {
     return norm( cross( a, b ) );
 }
 
 template< typename T >
-inline T bvu ::
+inline T bsc ::
 parallelogramArea ( const vec2<T> & a, const vec2<T> & b )
 {
     return a.x * b.y - a.y * b.x;
 }
 
 template< typename T>
-inline T bvu ::
+inline T bsc ::
 scalarTripleProduct( const vec3<T> & a, const vec3<T> & b, const vec3<T> & c )
 {
     return dot( a, cross( b, c ) );
 }
 
 template< typename T>
-inline T bvu ::
+inline T bsc ::
 parallelepipedVolume( const vec3<T> & a, const vec3<T> & b, const vec3<T> & c )
 {
     return norm( scalarTripleProduct( a, b ) );
 }
 
 template< typename T >
-inline int bvu ::
+inline int bsc ::
 ccw ( const vec2<T> & a, const vec2<T> & b )
 {
     T area = parallelogramArea( a, b );

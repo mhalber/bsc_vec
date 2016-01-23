@@ -4,7 +4,7 @@
 #include <glm/gtx/transform.hpp>
 #include <glm/gtx/norm.hpp>
 
-#include "bvu.h"
+#include "bsc_vec.h"
 
 template< typename T = float, typename F, typename G, typename ...Args>
 bool CompareResults( F functionA, G functionB, Args&&... arguments )
@@ -41,11 +41,11 @@ glmVec4ScalarAdd( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec4f
-bvuVec4ScalarAdd( const std::vector<float> & vals1, const float valB )
+bsc::vec4f
+bscVec4ScalarAdd( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 = v1 + valB;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 = v1 + valB;
     return v2;
 }
 
@@ -58,12 +58,12 @@ glmVec4Vec4Add( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec4f
-bvuVec4Vec4Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec4f
+bscVec4Vec4Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    bvu::vec4f v3 = v1 + v2;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::vec4f v3 = v1 + v2;
     return v3;
 }
 
@@ -75,11 +75,11 @@ glmVec4ScalarSub( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec4f
-bvuVec4ScalarSub( const std::vector<float> & vals1, const float valB )
+bsc::vec4f
+bscVec4ScalarSub( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 = v1 - valB;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 = v1 - valB;
     return v2;
 }
 
@@ -92,12 +92,12 @@ glmVec4Vec4Sub( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec4f
-bvuVec4Vec4Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec4f
+bscVec4Vec4Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    bvu::vec4f v3 = v1 - v2;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::vec4f v3 = v1 - v2;
     return v3;
 }
 
@@ -109,11 +109,11 @@ glmVec4ScalarMul( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec4f
-bvuVec4ScalarMul( const std::vector<float> & vals1, const float valB )
+bsc::vec4f
+bscVec4ScalarMul( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 = v1 * valB;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 = v1 * valB;
     return v2;
 }
 
@@ -126,12 +126,12 @@ glmVec4Vec4Mul( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec4f
-bvuVec4Vec4Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec4f
+bscVec4Vec4Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    bvu::vec4f v3 = v1 * v2;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::vec4f v3 = v1 * v2;
     return v3;
 }
 
@@ -143,11 +143,11 @@ glmVec4ScalarDiv( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec4f
-bvuVec4ScalarDiv( const std::vector<float> & vals1, const float valB )
+bsc::vec4f
+bscVec4ScalarDiv( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 = v1 / valB;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 = v1 / valB;
     return v2;
 }
 
@@ -160,12 +160,12 @@ glmVec4Vec4Div( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec4f
-bvuVec4Vec4Div( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec4f
+bscVec4Vec4Div( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    bvu::vec4f v3 = v1 / v2;
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::vec4f v3 = v1 / v2;
     return v3;
 }
 
@@ -180,11 +180,11 @@ glmVec3ScalarAdd( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec3f
-bvuVec3ScalarAdd( const std::vector<float> & vals1, const float valB )
+bsc::vec3f
+bscVec3ScalarAdd( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 = v1 + valB;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 = v1 + valB;
     return v2;
 }
 
@@ -197,12 +197,12 @@ glmVec3Vec3Add( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec3f
-bvuVec3Vec3Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec3f
+bscVec3Vec3Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f v3 = v1 + v2;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f v3 = v1 + v2;
     return v3;
 }
 
@@ -214,11 +214,11 @@ glmVec3ScalarSub( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec3f
-bvuVec3ScalarSub( const std::vector<float> & vals1, const float valB )
+bsc::vec3f
+bscVec3ScalarSub( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 = v1 - valB;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 = v1 - valB;
     return v2;
 }
 
@@ -231,12 +231,12 @@ glmVec3Vec3Sub( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec3f
-bvuVec3Vec3Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec3f
+bscVec3Vec3Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f v3 = v1 - v2;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f v3 = v1 - v2;
     return v3;
 }
 
@@ -248,11 +248,11 @@ glmVec3ScalarMul( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec3f
-bvuVec3ScalarMul( const std::vector<float> & vals1, const float valB )
+bsc::vec3f
+bscVec3ScalarMul( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 = v1 * valB;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 = v1 * valB;
     return v2;
 }
 
@@ -265,12 +265,12 @@ glmVec3Vec3Mul( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec3f
-bvuVec3Vec3Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec3f
+bscVec3Vec3Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f v3 = v1 * v2;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f v3 = v1 * v2;
     return v3;
 }
 
@@ -282,11 +282,11 @@ glmVec3ScalarDiv( const std::vector<float> & vals1, const float valB )
     return v2;
 }
 
-bvu::vec3f
-bvuVec3ScalarDiv( const std::vector<float> & vals1, const float valB )
+bsc::vec3f
+bscVec3ScalarDiv( const std::vector<float> & vals1, const float valB )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 = v1 / valB;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 = v1 / valB;
     return v2;
 }
 
@@ -299,12 +299,12 @@ glmVec3Vec3Div( const std::vector<float> & vals1, const std::vector<float> & val
     return v3;
 }
 
-bvu::vec3f
-bvuVec3Vec3Div( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec3f
+bscVec3Vec3Div( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f v3 = v1 / v2;
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f v3 = v1 / v2;
     return v3;
 }
 
@@ -321,11 +321,11 @@ glmNormalize( const std::vector<float> & vals )
     return v;
 }
 
-bvu::vec4f
-bvuNormalize( const std::vector<float> & vals )
+bsc::vec4f
+bscNormalize( const std::vector<float> & vals )
 {
-    bvu::vec4f v( vals[0], vals[1], vals[2], vals[3] );
-    v = bvu::normalize( v );
+    bsc::vec4f v( vals[0], vals[1], vals[2], vals[3] );
+    v = bsc::normalize( v );
     return v;
 }
 
@@ -339,11 +339,11 @@ glmDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 }
 
 float
-bvuDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bscDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    float f = bvu::dot( v1, v2 );
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    float f = bsc::dot( v1, v2 );
     return f;
 }
 
@@ -356,10 +356,10 @@ glmNorm( const std::vector<float> & vals )
 }
 
 float
-bvuNorm( const std::vector<float> & vals )
+bscNorm( const std::vector<float> & vals )
 {
-    bvu::vec4f v ( vals[0], vals[1], vals[2], vals[3] );
-    float f = bvu::norm( v );
+    bsc::vec4f v ( vals[0], vals[1], vals[2], vals[3] );
+    float f = bsc::norm( v );
     return f;
 }
 
@@ -372,10 +372,10 @@ glmNormSq( const std::vector<float> & vals )
 }
 
 float
-bvuNormSq( const std::vector<float> & vals )
+bscNormSq( const std::vector<float> & vals )
 {
-    bvu::vec4f v ( vals[0], vals[1], vals[2], vals[3] );
-    float f = bvu::normSq( v );
+    bsc::vec4f v ( vals[0], vals[1], vals[2], vals[3] );
+    float f = bsc::normSq( v );
     return f;
 }
 
@@ -389,11 +389,11 @@ glmDistance( const std::vector<float> & vals1, const std::vector<float> & vals2 
 }
 
 float
-bvuDistance( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bscDistance( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    float f = bvu::distance( v1, v2 );
+    bsc::vec4f v1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::vec4f v2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    float f = bsc::distance( v1, v2 );
     return f;
 }
 
@@ -406,12 +406,12 @@ glmCross( const std::vector<float> & vals1, const std::vector<float> & vals2 )
     return v3;
 }
 
-bvu::vec3f
-bvuCross( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec3f
+bscCross( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f v3 = bvu::cross( v1, v2 );
+    bsc::vec3f v1 ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f v2 ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f v3 = bsc::cross( v1, v2 );
     return v3;
 }
 
@@ -423,11 +423,11 @@ glmAbs( const std::vector<float> & vals )
     return v2;
 }
 
-bvu::vec4f
-bvuAbs( const std::vector<float> & vals )
+bsc::vec4f
+bscAbs( const std::vector<float> & vals )
 {
-    bvu::vec4f v1 ( vals[0], vals[1], vals[2], vals[3] );
-    bvu::vec4f v2 = bvu::abs( v1 );
+    bsc::vec4f v1 ( vals[0], vals[1], vals[2], vals[3] );
+    bsc::vec4f v2 = bsc::abs( v1 );
     return v2;
 }
 
@@ -439,11 +439,11 @@ glmClamp( const std::vector<float> & vals )
     return v2;
 }
 
-bvu::vec4f
-bvuClamp( const std::vector<float> & vals )
+bsc::vec4f
+bscClamp( const std::vector<float> & vals )
 {
-    bvu::vec4f v1 ( vals[0], vals[1], vals[2], vals[3] );
-    bvu::vec4f v2 = bvu::clamp( v1, 0.0f, 1.0f );
+    bsc::vec4f v1 ( vals[0], vals[1], vals[2], vals[3] );
+    bsc::vec4f v2 = bsc::clamp( v1, 0.0f, 1.0f );
     return v2;
 }
 
@@ -463,11 +463,11 @@ glmMat4Mat4Add( const std::vector<float> & vals1, const std::vector<float> & val
     return m1 + m2;
 }
 
-bvu::mat4f
-bvuMat4Mat4Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::mat4f
+bscMat4Mat4Add( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::mat4f m1 ( &vals1[0] );
-    bvu::mat4f m2 ( &vals2[0] );
+    bsc::mat4f m1 ( &vals1[0] );
+    bsc::mat4f m2 ( &vals2[0] );
     return m1 + m2;
 }
 
@@ -479,11 +479,11 @@ glmMat4Mat4Sub( const std::vector<float> & vals1, const std::vector<float> & val
     return m1 - m2;
 }
 
-bvu::mat4f
-bvuMat4Mat4Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::mat4f
+bscMat4Mat4Sub( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::mat4f m1 ( &vals1[0] );
-    bvu::mat4f m2 ( &vals2[0] );
+    bsc::mat4f m1 ( &vals1[0] );
+    bsc::mat4f m2 ( &vals2[0] );
     return m1 - m2;
 }
 
@@ -495,12 +495,12 @@ glmMat4Mat4Mul( const std::vector<float> & vals1, const std::vector<float> & val
     return m1 * m2;
 }
 
-bvu::mat4f
-bvuMat4Mat4Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::mat4f
+bscMat4Mat4Mul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::mat4f m1
+    bsc::mat4f m1
      ( &vals1[0] );
-    bvu::mat4f m2 ( &vals2[0] );
+    bsc::mat4f m2 ( &vals2[0] );
     return m1 * m2;
 }
 
@@ -513,11 +513,11 @@ glmMatInv( const std::vector<float> & vals1 )
     return glm::inverse(m);
 }
 
-bvu::mat4f
-bvuMatInv( const std::vector<float> & vals1 )
+bsc::mat4f
+bscMatInv( const std::vector<float> & vals1 )
 {
-    bvu::mat4f m ( &vals1[0] );
-    return bvu::inverse(m);
+    bsc::mat4f m ( &vals1[0] );
+    return bsc::inverse(m);
 }
 
 glm::mat4
@@ -527,11 +527,11 @@ glmMatTranspose( const std::vector<float> & vals1 )
     return glm::transpose( m );
 }
 
-bvu::mat4f
-bvuMatTranspose( const std::vector<float> & vals1 )
+bsc::mat4f
+bscMatTranspose( const std::vector<float> & vals1 )
 {
-    bvu::mat4f m ( &vals1[0] );
-    return bvu::transpose( m );
+    bsc::mat4f m ( &vals1[0] );
+    return bsc::transpose( m );
 }
 
 float
@@ -542,10 +542,10 @@ glmMatDeterminant( const std::vector<float> & vals1 )
 }
 
 float
-bvuMatDeterminant( const std::vector<float> & vals1 )
+bscMatDeterminant( const std::vector<float> & vals1 )
 {
-    bvu::mat4f m ( &vals1[0] );
-    return bvu::determinant(m);
+    bsc::mat4f m ( &vals1[0] );
+    return bsc::determinant(m);
 }
 
 glm::vec4
@@ -556,11 +556,11 @@ glmMatVecMul( const std::vector<float> & vals1, const std::vector<float> & vals2
     return m * v;
 }
 
-bvu::vec4f
-bvuMatVecMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::vec4f
+bscMatVecMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::mat4f m ( &vals1[0] );
-    bvu::vec4f v ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::mat4f m ( &vals1[0] );
+    bsc::vec4f v ( vals2[0], vals2[1], vals2[2], vals2[3] );
     return m * v;
 }
 
@@ -572,12 +572,12 @@ glmTranslate( const std::vector<float> & mat_vals, const std::vector<float> & ve
     return glm::translate( m, v );
 }
 
-bvu::mat4f
-bvuTranslate( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+bsc::mat4f
+bscTranslate( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
 {
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::translate( m, v );
+    bsc::mat4f m ( &mat_vals[0] );
+    bsc::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bsc::translate( m, v );
 }
 
 glm::mat4
@@ -588,12 +588,12 @@ glmScale( const std::vector<float> & mat_vals, const std::vector<float> & vec_va
     return glm::scale( m, v );
 }
 
-bvu::mat4f
-bvuScale( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
+bsc::mat4f
+bscScale( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals )
 {
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::scale( m, v );
+    bsc::mat4f m ( &mat_vals[0] );
+    bsc::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bsc::scale( m, v );
 }
 
 glm::mat4
@@ -604,12 +604,12 @@ glmRotate( const std::vector<float> & mat_vals, const std::vector<float> & vec_v
     return glm::rotate( m, angle, v );
 }
 
-bvu::mat4f
-bvuRotate ( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals, float angle )
+bsc::mat4f
+bscRotate ( const std::vector<float> & mat_vals, const std::vector<float> & vec_vals, float angle )
 {
-    bvu::mat4f m ( &mat_vals[0] );
-    bvu::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
-    return bvu::rotate( m, bsc::deg2rad(angle), v );
+    bsc::mat4f m ( &mat_vals[0] );
+    bsc::vec3f v ( vec_vals[0], vec_vals[1], vec_vals[2] );
+    return bsc::rotate( m, bsc::deg2rad(angle), v );
 }
 
 glm::mat4
@@ -621,13 +621,13 @@ glmLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, 
     return glm::lookAt( eye, center, up );
 }
 
-bvu::mat4f
-bvuLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, const std::vector<float> & vals3 )
+bsc::mat4f
+bscLookAt ( const std::vector<float> & vals1, const std::vector<float> & vals2, const std::vector<float> & vals3 )
 {
-    bvu::vec3f eye ( vals1[0], vals1[1], vals1[2] );
-    bvu::vec3f center ( vals2[0], vals2[1], vals2[2] );
-    bvu::vec3f up ( vals3[0], vals3[1], vals3[2] );
-    return bvu::lookAt( eye, center, up );
+    bsc::vec3f eye ( vals1[0], vals1[1], vals1[2] );
+    bsc::vec3f center ( vals2[0], vals2[1], vals2[2] );
+    bsc::vec3f up ( vals3[0], vals3[1], vals3[2] );
+    return bsc::lookAt( eye, center, up );
 }
 
 glm::mat4
@@ -636,10 +636,10 @@ glmPerspective ( const float fovy, const float aspect, const float z_near, const
     return glm::perspective( fovy, aspect, z_near, z_far );
 }
 
-bvu::mat4f
-bvuPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
+bsc::mat4f
+bscPerspective ( const float fovy, const float aspect, const float z_near, const float z_far )
 {
-    return bvu::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far );
+    return bsc::perspective( bsc::deg2rad(fovy), aspect, z_near, z_far );
 }
 
 
@@ -649,10 +649,10 @@ glmFrustum ( const float left, const float right, const float bottom, const floa
     return glm::frustum( left, right, bottom, top, z_near, z_far );
 }
 
-bvu::mat4f
-bvuFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+bsc::mat4f
+bscFrustum ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    return bvu::frustum( left, right, bottom, top, z_near, z_far );
+    return bsc::frustum( left, right, bottom, top, z_near, z_far );
 }
 
 glm::mat4
@@ -661,10 +661,10 @@ glmOrtho ( const float left, const float right, const float bottom, const float 
     return glm::ortho( left, right, bottom, top, z_near, z_far );
 }
 
-bvu::mat4f
-bvuOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
+bsc::mat4f
+bscOrtho ( const float left, const float right, const float bottom, const float top, const float z_near, const float z_far )
 {
-    return bvu::ortho( left, right, bottom, top, z_near, z_far );
+    return bsc::ortho( left, right, bottom, top, z_near, z_far );
 }
 
 glm::vec3
@@ -677,14 +677,14 @@ glmProject ()
     return glm::project( w, view, proj, viewport );
 }
 
-bvu::vec3f
-bvuProject ()
+bsc::vec3f
+bscProject ()
 {
-    bvu::vec4f w ( 10.0f, 10.0f, 10.0f, 1.0f);
-    bvu::mat4f proj = bvu::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
-    bvu::mat4f view = bvu::lookAt( bvu::vec3f( 0.0, 0.0, -3.0 ), bvu::vec3f( 0.0, 0.0, 0.0 ), bvu::vec3f( 0.0, 1.0, 0.0 ) );
-    bvu::vec4f viewport (0, 0, 640, 480);
-    return bvu::project( w, view, proj, viewport );
+    bsc::vec4f w ( 10.0f, 10.0f, 10.0f, 1.0f);
+    bsc::mat4f proj = bsc::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
+    bsc::mat4f view = bsc::lookAt( bsc::vec3f( 0.0, 0.0, -3.0 ), bsc::vec3f( 0.0, 0.0, 0.0 ), bsc::vec3f( 0.0, 1.0, 0.0 ) );
+    bsc::vec4f viewport (0, 0, 640, 480);
+    return bsc::project( w, view, proj, viewport );
 }
 
 glm::vec4
@@ -697,14 +697,14 @@ glmUnProject ()
     return glm::vec4( glm::unProject( w, view, proj, viewport ), 1.0 );
 }
 
-bvu::vec4f
-bvuUnProject ()
+bsc::vec4f
+bscUnProject ()
 {
-    bvu::vec3f w ( -137.129, 685.701, 0.999 );
-    bvu::mat4f proj = bvu::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
-    bvu::mat4f view = bvu::lookAt( bvu::vec3f( 0.0, 0.0, -3.0 ), bvu::vec3f( 0.0, 0.0, 0.0 ), bvu::vec3f( 0.0, 1.0, 0.0 ) );
-    bvu::vec4f viewport (0, 0, 640, 480);
-    return bvu::unproject( w, view, proj, viewport );
+    bsc::vec3f w ( -137.129, 685.701, 0.999 );
+    bsc::mat4f proj = bsc::perspective( bsc::deg2rad(45.0f), 1.3f, 0.01f, 100.0f);
+    bsc::mat4f view = bsc::lookAt( bsc::vec3f( 0.0, 0.0, -3.0 ), bsc::vec3f( 0.0, 0.0, 0.0 ), bsc::vec3f( 0.0, 1.0, 0.0 ) );
+    bsc::vec4f viewport (0, 0, 640, 480);
+    return bsc::unproject( w, view, proj, viewport );
 }
 
 glm::quat
@@ -715,11 +715,11 @@ glmQuatMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
     return q1 * q2;
 }
 
-bvu::quatf
-bvuQuatMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bsc::quatf
+bscQuatMul( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::quatf q1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::quatf q2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    bsc::quatf q1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::quatf q2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
     return q1 * q2;
 }
 
@@ -730,11 +730,11 @@ glmQuatConjugate( const std::vector<float> & vals1 )
     return glm::conjugate( q );
 }
 
-bvu::quatf
-bvuQuatConjugate( const std::vector<float> & vals1 )
+bsc::quatf
+bscQuatConjugate( const std::vector<float> & vals1 )
 {
-    bvu::quatf q ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    return bvu::conjugate( q );
+    bsc::quatf q ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    return bsc::conjugate( q );
 }
 
 glm::quat
@@ -744,11 +744,11 @@ glmQuatInverse( const std::vector<float> & vals1 )
     return glm::inverse( q );
 }
 
-bvu::quatf
-bvuQuatInverse( const std::vector<float> & vals1 )
+bsc::quatf
+bscQuatInverse( const std::vector<float> & vals1 )
 {
-    bvu::quatf q ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    return bvu::inverse( q );
+    bsc::quatf q ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    return bsc::inverse( q );
 }
 
 float
@@ -760,11 +760,11 @@ glmQuatDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 }
 
 float
-bvuQuatDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
+bscQuatDot( const std::vector<float> & vals1, const std::vector<float> & vals2 )
 {
-    bvu::quatf q1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
-    bvu::quatf q2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
-    return bvu::dot( q1, q2 );
+    bsc::quatf q1 ( vals1[0], vals1[1], vals1[2], vals1[3] );
+    bsc::quatf q2 ( vals2[0], vals2[1], vals2[2], vals2[3] );
+    return bsc::dot( q1, q2 );
 }
 
 glm::quat
@@ -774,11 +774,11 @@ glmMatToQuat( const std::vector<float> & mat_vals )
     return glm::quat_cast( m );
 }
 
-bvu::quatf
-bvuMatToQuat( const std::vector<float> & mat_vals )
+bsc::quatf
+bscMatToQuat( const std::vector<float> & mat_vals )
 {
-    bvu::mat4f m( &mat_vals[0] );
-    return bvu::to_quat( m );
+    bsc::mat4f m( &mat_vals[0] );
+    return bsc::to_quat( m );
 }
 
 glm::mat4
@@ -789,12 +789,12 @@ glmQuatToMat( const std::vector<float> & vals1 )
     return glm::mat4_cast( q );
 }
 
-bvu::mat4f
-bvuQuatToMat( const std::vector<float> & vals1 )
+bsc::mat4f
+bscQuatToMat( const std::vector<float> & vals1 )
 {
-    bvu::vec3f v ( vals1[0], vals1[1], vals1[2] );
-    bvu::quatf q ( vals1[3], v );
-    return bvu::to_mat4( q );
+    bsc::vec3f v ( vals1[0], vals1[1], vals1[2] );
+    bsc::quatf q ( vals1[3], v );
+    return bsc::to_mat4( q );
 }
 
 
@@ -828,54 +828,54 @@ RunTests()
 
     // Vector4 operators
 
-    if ( CompareResults( glmVec4ScalarAdd, bvuVec4ScalarAdd, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Addition");
+    if ( CompareResults( glmVec4ScalarAdd, bscVec4ScalarAdd, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Addition");
     else                                                                        printf("%-40s- failed!\n", "Vec4-Scalar Addition" );
 
-    if ( CompareResults( glmVec4Vec4Add, bvuVec4Vec4Add, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Addition");
+    if ( CompareResults( glmVec4Vec4Add, bscVec4Vec4Add, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Addition");
     else                                                                          printf("%-40s- failed!\n", "Vec4-Vec4 Addition");
 
-    if ( CompareResults( glmVec4ScalarSub, bvuVec4ScalarSub, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Substraction");
+    if ( CompareResults( glmVec4ScalarSub, bscVec4ScalarSub, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Substraction");
     else                                                                        printf("%-40s- failed!\n", "Vec4-Scalar Substraction");
 
-    if ( CompareResults( glmVec4Vec4Sub, bvuVec4Vec4Sub, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Substraction");
+    if ( CompareResults( glmVec4Vec4Sub, bscVec4Vec4Sub, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Substraction");
     else                                                                          printf("%-40s- failed!\n", "Vec4-Vec4 Substraction");
 
-    if ( CompareResults( glmVec4ScalarMul, bvuVec4ScalarMul, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Multiplication");
+    if ( CompareResults( glmVec4ScalarMul, bscVec4ScalarMul, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Multiplication");
     else                                                                        printf("%-40s- failed!\n", "Vec4-Scalar Multiplication");
 
-    if ( CompareResults( glmVec4Vec4Mul, bvuVec4Vec4Mul,data_vec4_A,data_vec4_B ) ) printf("%-40s- passed!\n","Vec4-Vec4 Multiplication");
+    if ( CompareResults( glmVec4Vec4Mul, bscVec4Vec4Mul,data_vec4_A,data_vec4_B ) ) printf("%-40s- passed!\n","Vec4-Vec4 Multiplication");
     else                                                                       printf("%-40s- failed!\n","Vec4-Vec4 Multiplication");
 
-    if ( CompareResults( glmVec4ScalarDiv, bvuVec4ScalarDiv, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Division");
+    if ( CompareResults( glmVec4ScalarDiv, bscVec4ScalarDiv, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vec4-Scalar Division");
     else                                                                        printf("%-40s- failed!\n", "Vec4-Scalar Division");
 
-    if ( CompareResults( glmVec4Vec4Div, bvuVec4Vec4Div, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Division");
+    if ( CompareResults( glmVec4Vec4Div, bscVec4Vec4Div, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vec4-Vec4 Division");
     else                                                                          printf("%-40s- failed!\n", "Vec4-Vec4 Division");
 
     // Vector3 operators
 
-    if ( CompareResults( glmVec3ScalarAdd, bvuVec3ScalarAdd, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Addition");
+    if ( CompareResults( glmVec3ScalarAdd, bscVec3ScalarAdd, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Addition");
     else                                                                        printf("%-40s- failed!\n", "Vector3-Scalar Addition" );
 
-    if ( CompareResults( glmVec3Vec3Add, bvuVec3Vec3Add, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vec3 Addition");
+    if ( CompareResults( glmVec3Vec3Add, bscVec3Vec3Add, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vec3 Addition");
     else                                                                          printf("%-40s- failed!\n", "Vector3-Vec3 Addition");
 
-    if ( CompareResults( glmVec3ScalarSub, bvuVec3ScalarSub, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Substraction");
+    if ( CompareResults( glmVec3ScalarSub, bscVec3ScalarSub, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Substraction");
     else                                                                        printf("%-40s- failed!\n", "Vector3-Scalar Substraction");
 
-    if ( CompareResults( glmVec3Vec3Sub, bvuVec3Vec3Sub, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vector3 Substraction");
+    if ( CompareResults( glmVec3Vec3Sub, bscVec3Vec3Sub, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vector3 Substraction");
     else                                                                          printf("%-40s- failed!\n", "Vector3-Vector3 Substraction");
 
-    if ( CompareResults( glmVec3ScalarMul, bvuVec3ScalarMul, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Multiplication");
+    if ( CompareResults( glmVec3ScalarMul, bscVec3ScalarMul, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Multiplication");
     else                                                                        printf("%-40s- failed!\n", "Vector3-Scalar Multiplication");
 
-    if ( CompareResults( glmVec3Vec3Mul, bvuVec3Vec3Mul,data_vec4_A,data_vec4_B ) ) printf("%-40s- passed!\n","Vector3-Vector3 Multiplication");
+    if ( CompareResults( glmVec3Vec3Mul, bscVec3Vec3Mul,data_vec4_A,data_vec4_B ) ) printf("%-40s- passed!\n","Vector3-Vector3 Multiplication");
     else                                                                       printf("%-40s- failed!\n","Vector3-Vector3 Multiplication");
 
-    if ( CompareResults( glmVec3ScalarDiv, bvuVec3ScalarDiv, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Division");
+    if ( CompareResults( glmVec3ScalarDiv, bscVec3ScalarDiv, data_vec4_A, 3.2 ) ) printf("%-40s- passed!\n", "Vector3-Scalar Division");
     else                                                                        printf("%-40s- failed!\n", "Vector3-Scalar Division");
 
-    if ( CompareResults( glmVec3Vec3Div, bvuVec3Vec3Div, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vector3 Division");
+    if ( CompareResults( glmVec3Vec3Div, bscVec3Vec3Div, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector3-Vector3 Division");
     else                                                                          printf("%-40s- failed!\n", "Vector3-Vector3 Division");
 
 
@@ -884,108 +884,108 @@ RunTests()
 
     // Vector functions
 
-    if ( CompareResults( glmNormalize, bvuNormalize, data_vec4_A ) ) printf("%-40s- passed!\n", "Vector Normalization");
+    if ( CompareResults( glmNormalize, bscNormalize, data_vec4_A ) ) printf("%-40s- passed!\n", "Vector Normalization");
     else                                                             printf("%-40s- failed!\n", "Vector Normalization");
 
-    if ( CompareResults( glmDot, bvuDot, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Dot Product");
+    if ( CompareResults( glmDot, bscDot, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Dot Product");
     else                                                              printf("%-40s- failed!\n", "Vector Dot Product");
 
-    if ( CompareResults( glmNorm, bvuNorm, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Norm");
+    if ( CompareResults( glmNorm, bscNorm, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Norm");
     else                                                   printf("%-40s- failed!\n", "Vector Norm");
 
-    if ( CompareResults( glmNormSq, bvuNormSq, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Norm Squared");
+    if ( CompareResults( glmNormSq, bscNormSq, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Norm Squared");
     else                                                       printf("%-40s- failed!\n", "Vector Norm Squared");
 
-    if ( CompareResults( glmDistance, bvuDistance, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n","Vector Distance");
+    if ( CompareResults( glmDistance, bscDistance, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n","Vector Distance");
     else                                                                        printf("%-40s- failed!\n","Vector Distance");
 
-    if ( CompareResults( glmAbs, bvuAbs, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Absolute Value" );
+    if ( CompareResults( glmAbs, bscAbs, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Absolute Value" );
     else                                                 printf("%-40s- failed!\n", "Vector Absolute Value" );
 
-    if ( CompareResults( glmClamp, bvuClamp, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Clamp");
+    if ( CompareResults( glmClamp, bscClamp, data_vec4_B ) ) printf("%-40s- passed!\n", "Vector Clamp");
     else                                                     printf("%-40s- failed!\n", "Vector Clamp");
 
-    if ( CompareResults( glmCross, bvuCross, data_vec3_A, data_vec3_B ) ) printf("%-40s- passed!\n", "Vector Cross");
+    if ( CompareResults( glmCross, bscCross, data_vec3_A, data_vec3_B ) ) printf("%-40s- passed!\n", "Vector Cross");
     else                                                                  printf("%-40s- failed!\n", "Vector Cross");
 
     // Matrix operators
 
-    if ( CompareResults( glmMat4Mat4Add, bvuMat4Mat4Add, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Addition");
+    if ( CompareResults( glmMat4Mat4Add, bscMat4Mat4Add, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Addition");
     else                                                                          printf("%-40s- failed!\n", "Matrix-Matrix Addition");
 
-    if ( CompareResults( glmMat4Mat4Sub, bvuMat4Mat4Sub, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Substraction");
+    if ( CompareResults( glmMat4Mat4Sub, bscMat4Mat4Sub, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Substraction");
     else                                                                          printf("%-40s- failed!\n", "Matrix-Matrix Substraction");
 
-    if ( CompareResults( glmMat4Mat4Mul, bvuMat4Mat4Mul, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Mult");
+    if ( CompareResults( glmMat4Mat4Mul, bscMat4Mat4Mul, data_mat4_A, data_mat4_B ) ) printf("%-40s- passed!\n", "Matrix-Matrix Mult");
     else                                                                          printf("%-40s- failed!\n", "Matrix-Matrix Mult");
 
 
     // Matrix functions
 
-    if ( CompareResults( glmMatInv, bvuMatInv, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Inverse");
+    if ( CompareResults( glmMatInv, bscMatInv, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Inverse");
     else                                                       printf("%-40s- failed!\n", "Matrix Inverse");
 
-    if ( CompareResults( glmMatDeterminant, bvuMatDeterminant, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Determinant" );
+    if ( CompareResults( glmMatDeterminant, bscMatDeterminant, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Determinant" );
     else                                                                       printf("%-40s- failed!\n", "Matrix Determinant" );
 
-    if ( CompareResults( glmMatTranspose, bvuMatTranspose, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Transpose" );
+    if ( CompareResults( glmMatTranspose, bscMatTranspose, data_mat4_C ) ) printf("%-40s- passed!\n", "Matrix Transpose" );
     else                                                                   printf("%-40s- failed!\n", "Matrix Transpose" );
 
 
 
     // Vector Matrix Multiplicaton
-    if ( CompareResults( glmMatVecMul, bvuMatVecMul, data_mat4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Matrix-Vector Mult");
+    if ( CompareResults( glmMatVecMul, bscMatVecMul, data_mat4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Matrix-Vector Mult");
     else                                                                          printf("%-40s- failed!\n", "Matrix-Vector Mult");
 
 
     // Quaternions
-    if ( CompareResults( glmQuatMul, bvuQuatMul, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Quaternion Mult");
+    if ( CompareResults( glmQuatMul, bscQuatMul, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Quaternion Mult");
     else                                                                      printf("%-40s- failed!\n", "Quaternion Mult");
 
-    if ( CompareResults( glmQuatConjugate, bvuQuatConjugate, data_vec4_A ) ) printf("%-40s- passed!\n", "Quaternion Conjugate");
+    if ( CompareResults( glmQuatConjugate, bscQuatConjugate, data_vec4_A ) ) printf("%-40s- passed!\n", "Quaternion Conjugate");
     else                                                                     printf("%-40s- failed!\n", "Quaternion Conjugate");
 
-    if ( CompareResults( glmQuatDot, bvuQuatDot, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Quaternion Dot Prod.");
+    if ( CompareResults( glmQuatDot, bscQuatDot, data_vec4_A, data_vec4_B ) ) printf("%-40s- passed!\n", "Quaternion Dot Prod.");
     else                                                                     printf("%-40s- failed!\n", "Quaternion Dot Prod.");
 
-    if ( CompareResults( glmQuatInverse, bvuQuatInverse, data_vec4_A ) ) printf("%-40s- passed!\n", "Quaternion Inverse");
+    if ( CompareResults( glmQuatInverse, bscQuatInverse, data_vec4_A ) ) printf("%-40s- passed!\n", "Quaternion Inverse");
     else                                                                 printf("%-40s- failed!\n", "Quaternion Inverse");
 
-    if ( CompareResults( glmQuatToMat, bvuQuatToMat, data_quat_A ) ) printf("%-40s- passed!\n", "Quaternion To Matrix");
+    if ( CompareResults( glmQuatToMat, bscQuatToMat, data_quat_A ) ) printf("%-40s- passed!\n", "Quaternion To Matrix");
     else                                                             printf("%-40s- failed!\n", "Quaternion To Matrix");
 
 
-    if ( CompareResults( glmMatToQuat, bvuMatToQuat, data_mat4_A ) ) printf("%-40s- passed!\n", "Matrix To Quaternion");
+    if ( CompareResults( glmMatToQuat, bscMatToQuat, data_mat4_A ) ) printf("%-40s- passed!\n", "Matrix To Quaternion");
     else                                                             printf("%-40s- failed!\n", "Matrix To Quaternion");
 
     // Glu functions
-    if ( CompareResults( glmLookAt, bvuLookAt, data_vec3_A, data_vec3_B, data_vec3_C ) ) printf("%-40s- passed!\n", "Look At Matrix");
+    if ( CompareResults( glmLookAt, bscLookAt, data_vec3_A, data_vec3_B, data_vec3_C ) ) printf("%-40s- passed!\n", "Look At Matrix");
     else                                                                                 printf("%-40s- failed!\n", "Look At Matrix");
 
-    if ( CompareResults( glmPerspective, bvuPerspective, 45.0f, 1.3f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Perspective Matrix");
+    if ( CompareResults( glmPerspective, bscPerspective, 45.0f, 1.3f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Perspective Matrix");
     else                                                                                printf("%-40s- failed!\n", "Perspective Matrix");
 
-    if ( CompareResults( glmFrustum, bvuFrustum, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Frustum Matrix");
+    if ( CompareResults( glmFrustum, bscFrustum, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Frustum Matrix");
     else                                                                                     printf("%-40s- failed!\n", "Frustum Matrix");
 
-    if ( CompareResults( glmOrtho, bvuOrtho, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Ortho Matrix");
+    if ( CompareResults( glmOrtho, bscOrtho, -0.5f, 0.5f, -0.5f, 0.5f, 0.01f, 100.0f ) ) printf("%-40s- passed!\n", "Ortho Matrix");
     else                                                                                 printf("%-40s- failed!\n", "Ortho Matrix");
 
-    if ( CompareResults( glmProject, bvuProject ) ) printf("%-40s- passed!\n", "Project Function");
+    if ( CompareResults( glmProject, bscProject ) ) printf("%-40s- passed!\n", "Project Function");
     else                                            printf("%-40s- failed!\n", "Project Function");
 
-    if ( CompareResults( glmUnProject, bvuUnProject ) ) printf("%-40s- passed!\n", "Unproject Function");
+    if ( CompareResults( glmUnProject, bscUnProject ) ) printf("%-40s- passed!\n", "Unproject Function");
     else                                                printf("%-40s- failed!\n", "Unproject Function");
 
 
     // Transforms
-    if ( CompareResults( glmTranslate, bvuTranslate, data_mat4_A, data_vec4_A ) ) printf("%-40s- passed!\n", "Translation Matrix");
+    if ( CompareResults( glmTranslate, bscTranslate, data_mat4_A, data_vec4_A ) ) printf("%-40s- passed!\n", "Translation Matrix");
     else                                                                          printf("%-40s- failed!\n", "Translation Matrix");
 
-    if ( CompareResults( glmScale, bvuScale, data_mat4_A, data_vec4_A ) ) printf("%-40s- passed!\n", "Scaling Matrix");
+    if ( CompareResults( glmScale, bscScale, data_mat4_A, data_vec4_A ) ) printf("%-40s- passed!\n", "Scaling Matrix");
     else                                                                  printf("%-40s- failed!\n", "Scaling Matrix");
 
-    if ( CompareResults( glmRotate, bvuRotate, data_mat4_A, data_vec4_A, 45.0 ) ) printf("%-40s- passed!\n", "Rotation Matrix");
+    if ( CompareResults( glmRotate, bscRotate, data_mat4_A, data_vec4_A, 45.0 ) ) printf("%-40s- passed!\n", "Rotation Matrix");
     else                                                                          printf("%-40s- failed!\n", "Rotation Matrix");
 
 

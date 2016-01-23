@@ -1,6 +1,6 @@
 #pragma once
 
-namespace bvu
+namespace bsc
 {
     template <typename T>
     struct vec3

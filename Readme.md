@@ -1,8 +1,8 @@
-# bvu - basic vector utilities v. 01
+# Basic vector utilities v. 01
 
 #### What is this?
 
-This is a small and simple library for basic vector operation, hence the inventive name of basic vector utilities( bvu )
+This is a small and simple library for basic vector operation, hence the inventive name of basic vector utilities
 
 It implements 2d, 3d and 4d vector and matrix types, alongside with quaternions.
 Most of the functions can be found in bvu_impl/funct_mat.h, bvu_impl/funct_vec.h and bvu_impl/funct_quat.h, and hopefully are pretty self-explanatory. Besides standard norms, inverses and transposes, it also has implementations of useful [glu](https://en.wikipedia.org/wiki/OpenGL_Utility_Library) functions.

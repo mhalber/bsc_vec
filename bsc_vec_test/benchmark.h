@@ -12,7 +12,7 @@ generateVectorData( std::vector<T> & vecs)
 }
 
 void
-copyVectorData( const std::vector<bvu::vec4f> & vecs1, std::vector< glm::vec4> & vecs2)
+copyVectorData( const std::vector<bsc::vec4f> & vecs1, std::vector< glm::vec4> & vecs2)
 {
     for ( int i = 0 ; i < vecs1.size() ; ++i )
     {
@@ -39,7 +39,7 @@ generateMatrixData( std::vector<T> & mats)
 }
 
 void
-copyMatrixData( const std::vector<bvu::mat4f> & mats1, std::vector< glm::mat4> & mats2)
+copyMatrixData( const std::vector<bsc::mat4f> & mats1, std::vector< glm::mat4> & mats2)
 {
     for ( int i = 0 ; i < mats1.size() ; ++i )
     {
@@ -54,11 +54,11 @@ copyMatrixData( const std::vector<bvu::mat4f> & mats1, std::vector< glm::mat4> &
 }
 
 void
-bvuNormalizeAll ( std::vector<bvu::vec4f> & vecs )
+bscNormalizeAll ( std::vector<bsc::vec4f> & vecs )
 {
     for ( int i = 0 ; i < vecs.size() ; ++i )
     {
-        vecs[i] = bvu::normalize ( vecs[i] );
+        vecs[i] = bsc::normalize ( vecs[i] );
     }
 }
 
@@ -72,7 +72,7 @@ glmNormalizeAll ( std::vector<glm::vec4> & vecs )
 }
 
 void
-bvuAddAll ( std::vector<bvu::vec4f> & vecs )
+bscAddAll ( std::vector<bsc::vec4f> & vecs )
 {
     for ( int i = 0 ; i < vecs.size() ; ++i )
     {
@@ -90,11 +90,11 @@ glmAddAll ( std::vector<glm::vec4> & vecs )
 }
 
 void
-bvuInvertAll ( std::vector<bvu::mat4f> & mats )
+bscInvertAll ( std::vector<bsc::mat4f> & mats )
 {
     for ( int i = 0 ; i < mats.size() ; ++i )
     {
-        mats[i] = bvu::inverse( mats[i] );
+        mats[i] = bsc::inverse( mats[i] );
     }
 }
 
@@ -108,11 +108,11 @@ glmInvertAll ( std::vector<glm::mat4> & mats )
 }
 
 void
-bvuLookAtGen ( std::vector<bvu::mat4f> & mats )
+bscLookAtGen ( std::vector<bsc::mat4f> & mats )
 {
     for ( int i = 0 ; i < mats.size() ; ++i )
     {
-        mats[i] = bvu::lookAt( bvu::vec3f( 0.0, 0.0, 0.0 ), bvu::vec3f( 0.0, 0.0, -5.0 ), bvu::vec3f( 0.0, 1.0, 0.0 ) );
+        mats[i] = bsc::lookAt( bsc::vec3f( 0.0, 0.0, 0.0 ), bsc::vec3f( 0.0, 0.0, -5.0 ), bsc::vec3f( 0.0, 1.0, 0.0 ) );
     }
 }
 
@@ -126,11 +126,11 @@ glmLookAtGen ( std::vector<glm::mat4> & mats )
 }
 
 void
-bvuPerspectiveGen ( std::vector<bvu::mat4f> & mats )
+bscPerspectiveGen ( std::vector<bsc::mat4f> & mats )
 {
     for ( int i = 0 ; i < mats.size() ; ++i )
     {
-        mats[i] = bvu::perspective( 0.785398f, 1.3f, 0.01f, 100.0f );
+        mats[i] = bsc::perspective( 0.785398f, 1.3f, 0.01f, 100.0f );
     }
 }
 
@@ -148,9 +148,9 @@ RunBenchmark ()
 {
     int n_examples = 100000;
     const int n_reps = 10000;
-    std::vector < bvu::vec4f > vectors_A;
+    std::vector < bsc::vec4f > vectors_A;
     std::vector < glm::vec4 > vectors_B;
-    std::vector < bvu::mat4f > matrices_A;
+    std::vector < bsc::mat4f > matrices_A;
     std::vector < glm::mat4 > matrices_B;
     vectors_A.reserve( n_examples );
     vectors_B.reserve( n_examples );
@@ -159,23 +159,23 @@ RunBenchmark ()
 
     generateVectorData( vectors_A );
     copyVectorData( vectors_A, vectors_B );
-    generateMatrixData<bvu::mat4f, bvu::vec4f>( matrices_A );
+    generateMatrixData<bsc::mat4f, bsc::vec4f>( matrices_A );
     copyMatrixData( matrices_A, matrices_B );
 
     printf( "   (glm) Time to normalize %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( glmNormalizeAll, vectors_B ) );
-    printf( "   (bvu) Time to normalize %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bvuNormalizeAll, vectors_A ) );
+    printf( "   (bsc) Time to normalize %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bscNormalizeAll, vectors_A ) );
 
     printf( "   (glm) Time to add %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( glmAddAll, vectors_B ) );
-    printf( "   (bvu) Time to add %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bvuAddAll, vectors_A ) );
+    printf( "   (bsc) Time to add %d vectors - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bscAddAll, vectors_A ) );
 
     printf( "   (glm) Time to invert %d matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( glmInvertAll, matrices_B ) );
-    printf( "   (bvu) Time to invert %d matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bvuInvertAll, matrices_A ) );
+    printf( "   (bsc) Time to invert %d matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bscInvertAll, matrices_A ) );
 
     printf( "   (glm) Time to generate %d lookAt matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( glmLookAtGen, matrices_B ) );
-    printf( "   (bvu) Time to generate %d lookAt matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bvuLookAtGen, matrices_A ) );
+    printf( "   (bsc) Time to generate %d lookAt matrices - %f sec.\n", n_examples, bsc::MeasureTime<n_reps>( bscLookAtGen, matrices_A ) );
 
     printf( "   (glm) Time to generate %d persp. matrices - %f sec.\n", n_examples,
            bsc::MeasureTime<n_reps>( glmPerspectiveGen, matrices_B ) );
-    printf( "   (bvu) Time to generate %d persp. matrices - %f sec.\n", n_examples,
-           bsc::MeasureTime<n_reps>( bvuPerspectiveGen, matrices_A ) );
+    printf( "   (bsc) Time to generate %d persp. matrices - %f sec.\n", n_examples,
+           bsc::MeasureTime<n_reps>( bscPerspectiveGen, matrices_A ) );
 }

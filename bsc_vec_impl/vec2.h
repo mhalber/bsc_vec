@@ -1,6 +1,6 @@
 #pragma once
 
-namespace bvu
+namespace bsc
 {
     template <typename T>
     struct vec2
@@ -84,6 +84,7 @@ namespace bvu
     {
         this->x = v.x;
         this->y = v.y;
+        return *this;
     }
 
     template <typename T>
