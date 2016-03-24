@@ -16,10 +16,5 @@ Feel free to contact me with any comments or suggestions for improvement.
 #### Usage
 
 This is header only library, so just add the location where bvu.h and bvu_impl folder is to your include path.
-To build the tests + benchmark in bvu_test you need to install [glm](http://glm.g-truc.net/0.9.7/index.html). This has only been tested on MacOs.
+To build the tests + benchmark in bvu_test you need to install [glm](http://glm.g-truc.net/0.9.7/index.html). This has only been tested on MacOS X 10.10.
 
-#### TODO
-
-- eigendecomposition / svd
-- PCA
-- color generation ( similar to https://randomcolor.llllll.li )
