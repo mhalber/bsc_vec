@@ -1,3 +1,5 @@
+This repository is no longer maintained
+
 # Basic vector utilities v. 01
 
 #### What is this?
